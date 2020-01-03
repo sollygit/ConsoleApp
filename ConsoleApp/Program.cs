@@ -15,8 +15,8 @@ namespace ConsoleApp
             .Add("Lovely", () => { Lovely.Test(); })
             .Add("FizzBuzz", () => { FizzBuzz(); })
             .Add("Youtube Data API", () => { GoogleDataApi.YouTubeDataApiSearch().Wait(); })
-            .Add("Facebook Graph API My Account", () => { FacebookGraphApi_MyAccount(); })
-            .Add("Facebook Graph API Account Query", () => { FacebookGraphApi_AccountQuery(); })
+            .Add("Facebook Graph API My Account", () => { FacebookGraphApi_PublicProfile(); })
+            .Add("Facebook Graph API Account Query", () => { FacebookGraphApi_SearchQuery(); })
             .Add("Revese Words", () => { ReverseWords(); })
             .Add("Linked List", () => { LinkedList.Test(); })
             .Add("Is Palindrome ?", () => { IsPalindromeTest(); })
@@ -107,20 +107,18 @@ namespace ConsoleApp
         {
             try
             {
-                using (var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["CSV_Path"]}"))
+                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["CSV_Path"]}");
+                var text = reader.ReadToEnd();
+                var json = text.CsvToJson();
+
+                Console.WriteLine(JToken.Parse(json).ToString(Formatting.Indented));
+                Console.WriteLine();
+
+                var todoItems = json.FromJson<IEnumerable<TodoItem>>();
+
+                foreach (var item in todoItems)
                 {
-                    var text = reader.ReadToEnd();
-                    var json = text.CsvToJson();
-
-                    Console.WriteLine(JToken.Parse(json).ToString(Formatting.Indented));
-                    Console.WriteLine();
-
-                    var todoItems = json.FromJson<IEnumerable<TodoItem>>();
-
-                    foreach (var item in todoItems)
-                    {
-                        Console.WriteLine($"{item.Name}, {item.IsComplete}, {item.OwnerId}");
-                    }
+                    Console.WriteLine($"{item.Name}, {item.IsComplete}, {item.OwnerId}");
                 }
             }
 
@@ -150,39 +148,31 @@ namespace ConsoleApp
             }
         }
 
-        static void FacebookGraphApi_MyAccount()
+        static void FacebookGraphApi_PublicProfile()
         {
-            string accessToken = ConfigurationManager.AppSettings["FacebookAccessToken"];
-            Console.WriteLine("My Facebook account using Facebook Graph API:");
-
+            var accessToken = ConfigurationManager.AppSettings["FacebookAccessToken"];
             var facebookClient = new FacebookClient();
             var facebookService = new FacebookService(facebookClient);
 
             try
             {
                 var account = facebookService.GetAccount(accessToken).GetAwaiter().GetResult();
-
-                if (String.IsNullOrEmpty(account))
-                {
-                    Console.WriteLine("Something went wrong in GetAccount, Check access token.");
-                }
-                else
-                {
-                    Console.WriteLine(JToken.Parse(account).ToString(Formatting.Indented));
-                }
+                Console.WriteLine(JToken.Parse(account).ToString(Formatting.Indented));
             }
 
             catch (Exception ex)
             {
-                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine(ex.Message);
             }
         }
 
-        static void FacebookGraphApi_AccountQuery()
+        static void FacebookGraphApi_SearchQuery()
         {
-            string accessToken = ConfigurationManager.AppSettings["FacebookAccessToken"];
-            Console.WriteLine("Please enter a name to search with Facebook Graph API:");
+            Console.WriteLine("Please enter your search query:");
+
+            var accessToken = ConfigurationManager.AppSettings["FacebookAccessToken"];
             string query;
+            
             while (String.IsNullOrEmpty(query = Console.ReadLine().Trim()))
             {
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
@@ -193,13 +183,9 @@ namespace ConsoleApp
 
             try
             {
-                var result = facebookService.GetAccountList(accessToken, query).GetAwaiter().GetResult();
+                var result = facebookService.Search(accessToken, query).GetAwaiter().GetResult();
 
-                if (String.IsNullOrEmpty(result))
-                {
-                    Console.WriteLine("Something went wrong in GetAccountList.");
-                }
-                else if (result == "{\"data\":[]}")
+                if (result == "{\"data\":[]}")
                 {
                     Console.WriteLine("No results found!");
                 }

@@ -8,8 +8,8 @@ namespace ConsoleApp
 {
     public interface IFacebookClient
     {
-        Task<string> GetAsync(string accessToken, string endpoint, string args = null);
-        Task<string> GetAsync(string accessToken, string endpoint, string query, string type, string args = null);
+        Task<string> Get(string accessToken, string endpoint, string args);
+        Task<string> Get(string accessToken, string endpoint, string query, string type);
     }
 
     public class FacebookClient : IFacebookClient
@@ -24,30 +24,24 @@ namespace ConsoleApp
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));
         }
 
-        public async Task<string> GetAsync(string accessToken, string endpoint, string args = null)
+        public async Task<string> Get(string accessToken, string endpoint, string args)
         {
-            var uri = $"{endpoint}?access_token={accessToken}&{args}";
+            var uri = $"{endpoint}?fields={args}&access_token={accessToken}";
             var response = await _httpClient.GetAsync(uri);
 
-            if (!response.IsSuccessStatusCode)
-                return string.Empty;
+            Console.WriteLine($"{_httpClient.BaseAddress}{uri}");
 
-            var result = await response.Content.ReadAsStringAsync();
-
-            return result;
+            return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> GetAsync(string accessToken, string endpoint, string query, string type, string args = null)
+        public async Task<string> Get(string accessToken, string endpoint, string query, string type)
         {
-            var uri = $"{endpoint}?access_token={accessToken}&q={query}&type={type}&limit=10&{args}";
+            var uri = $"{endpoint}?q={query}&type={type}&limit=10&access_token={accessToken}";
             var response = await _httpClient.GetAsync(uri);
 
-            if (!response.IsSuccessStatusCode)
-                return string.Empty;
+            Console.WriteLine($"{_httpClient.BaseAddress}{uri}");
 
-            var result = await response.Content.ReadAsStringAsync();
-
-            return result;
+            return await response.Content.ReadAsStringAsync();
         }
     }
 }
