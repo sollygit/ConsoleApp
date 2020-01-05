@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using ConsoleApp.Models;
+using System.Threading.Tasks;
 
-namespace ConsoleApp
+namespace ConsoleApp.Services
 {
     public interface IFacebookService
     {

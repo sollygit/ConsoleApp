@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ConsoleApp
+namespace ConsoleApp.Models
 {
     public enum OutputType
     {

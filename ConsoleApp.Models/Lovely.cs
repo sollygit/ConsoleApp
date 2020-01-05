@@ -1,13 +1,12 @@
 ﻿using System;
 
-namespace ConsoleApp
+namespace ConsoleApp.Models
 {
     public abstract class Spouse
     {
         const string empty = " ";
         const string dot = "*";
-
-        int[] writePattern;
+        readonly int[] writePattern;
         protected int currentLineNumber = 0;
 
         protected Spouse(string name, int[] writePattern)

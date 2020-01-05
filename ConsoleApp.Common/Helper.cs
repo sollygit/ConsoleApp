@@ -4,17 +4,12 @@ using System;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ConsoleApp.Models;
 
-namespace ConsoleApp
+namespace ConsoleApp.Common
 {
     public static class Helper
     {
-        public const string JSON_TECHNOLOGIES = "[" +
-            "{ \"technologyId\": 1, \"technologyName\": \"Azure\" }," +
-            "{ \"technologyId\": 2, \"technologyName\": \"SQL\" }," +
-            "{ \"technologyId\": 3, \"technologyName\": \"CSharp\" }" +
-        "]";
-
         public static string Spaceless(string word)
         {
             if (String.IsNullOrEmpty(word)) return string.Empty;

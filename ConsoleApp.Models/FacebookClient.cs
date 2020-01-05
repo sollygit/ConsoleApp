@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
-namespace ConsoleApp
+namespace ConsoleApp.Models
 {
     public interface IFacebookClient
     {
@@ -16,9 +15,9 @@ namespace ConsoleApp
     {
         private readonly HttpClient _httpClient;
 
-        public FacebookClient()
+        public FacebookClient(string uri)
         {
-            _httpClient = new HttpClient { BaseAddress = new Uri(ConfigurationManager.AppSettings["FacebookApiUri"]) };
+            _httpClient = new HttpClient { BaseAddress = new Uri(uri) };
             _httpClient.DefaultRequestHeaders
                 .Accept
                 .Add(new MediaTypeWithQualityHeaderValue("application/json"));

@@ -1,3 +1,4 @@
+using ConsoleApp.Common;
 using NUnit.Framework;
 using System;
 

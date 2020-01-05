@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace ConsoleApp
+namespace ConsoleApp.Models
 {
     public interface IGenerate
     {
@@ -58,8 +58,8 @@ namespace ConsoleApp
 
     public static class Lottery
     {
-        static int winnerNumber = 7;
-        static int poolOfNumbers = 100;
+        static readonly int winnerNumber = 7;
+        static readonly int poolOfNumbers = 100;
 
         public static void Test()
         {

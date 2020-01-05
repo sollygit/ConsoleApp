@@ -8,12 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="EasyConsoleCore" Version="1.0.2" />
-    <PackageReference Include="Google.Apis" Version="1.42.0" />
-    <PackageReference Include="Google.Apis.Core" Version="1.42.0" />
-    <PackageReference Include="Google.Apis.YouTube.v3" Version="1.42.0.1758" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="3.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleApp.Common\ConsoleApp.Common.csproj" />
+    <ProjectReference Include="..\ConsoleApp.Services\ConsoleApp.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

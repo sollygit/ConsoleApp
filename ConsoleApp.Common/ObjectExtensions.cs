@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace ConsoleApp
+namespace ConsoleApp.Common
 {
     public static class ObjectExtensions
     {

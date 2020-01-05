@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ConsoleApp
+namespace ConsoleApp.Models
 {
-    public class YouTubeSearch
+    public class YouTube
     {
-        public async Task Run(string apiKey, string query, int maxResults)
+        public async Task Search(string apiKey, string query, int maxResults)
         {
             var youtubeService = new YouTubeService(new BaseClientService.Initializer()
             {
