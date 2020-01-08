@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
@@ -118,6 +119,32 @@ namespace ConsoleApp
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+            }
+        }
+
+        public async static void Forcasts_AsyncEnumerable()
+        {
+            await foreach (var forcast in forecasts())
+            {
+                Console.WriteLine($"{forcast}");
+            }
+
+            // Declare a local function.
+            static async IAsyncEnumerable<WeatherForecast> forecasts()
+            {
+                var rng = new Random();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    await Task.Delay(1000); // Simulate waiting for data to come through. 
+
+                    yield return new WeatherForecast
+                    {
+                        Date = Helper.GetRandomDate(DateTime.Now, DateTime.Now.AddYears(1)),
+                        TemperatureC = rng.Next(-20, 55),
+                        Summary = Constants.SUMMARIES[rng.Next(Constants.SUMMARIES.Length)]
+                    };
+                }
             }
         }
 

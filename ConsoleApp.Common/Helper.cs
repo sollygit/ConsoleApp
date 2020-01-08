@@ -200,5 +200,14 @@ namespace ConsoleApp.Common
 
             return technologies;
         }
+
+        public static DateTime GetRandomDate(DateTime from, DateTime to)
+        {
+            var rnd = new Random();
+            var range = to - from;
+            var randTimeSpan = new TimeSpan((long)(rnd.NextDouble() * range.Ticks));
+
+            return from + randTimeSpan;
+        }
     }
 }

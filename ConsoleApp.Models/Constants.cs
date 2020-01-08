@@ -1,4 +1,6 @@
-﻿namespace ConsoleApp.Models
+﻿using System.Collections.Generic;
+
+namespace ConsoleApp.Models
 {
     public class Constants
     {
@@ -7,5 +9,9 @@
             "{ \"technologyId\": 2, \"technologyName\": \"SQL\" }," +
             "{ \"technologyId\": 3, \"technologyName\": \"CSharp\" }" +
         "]";
+
+        public static readonly string[] SUMMARIES = { 
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching" 
+        };
     }
 }

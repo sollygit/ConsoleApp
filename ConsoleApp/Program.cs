@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Models;
 using EasyConsoleCore;
+using System;
 
 namespace ConsoleApp
 {
@@ -23,6 +24,7 @@ namespace ConsoleApp
             .Add("JSON Deserialise", () => { MenuAction.JSON_Deserialize(); })
             .Add("CSV to JSON", () => { MenuAction.CsvToJson(); })
             .Add("Fizz Buzz", () => { MenuAction.FizzBuzz(); })
+            .Add("Yield AsyncEnumerable Forcasts", () => { MenuAction.Forcasts_AsyncEnumerable(); })
             .Add("Youtube Data API", () => { MenuAction.Youtube_SearchQuery(); })
             .Add("Facebook Public Profile", () => { MenuAction.Facebook_Profile(); })
             .Add("Facebook Search Query", () => { MenuAction.Facebook_SearchQuery(); })
@@ -31,7 +33,7 @@ namespace ConsoleApp
             while (!exit)
             {
                 menu.Display();
-                System.Console.WriteLine("");
+                Console.WriteLine("");
             }
 
             Lovely.Test();
