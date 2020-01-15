@@ -209,5 +209,24 @@ namespace ConsoleApp.Common
 
             return from + randTimeSpan;
         }
+
+        public static string Encode(int i)
+        {
+            if (i == 0)
+            {
+                return Constants.Alphabet[0].ToString();
+            }
+
+            var s = string.Empty;
+            var length = Constants.Alphabet.Length;
+
+            while (i > 0)
+            {
+                s += Constants.Alphabet[i % length];
+                i = i / length;
+            }
+
+            return string.Join(string.Empty, s.Reverse());
+        }
     }
 }
