@@ -7,11 +7,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\Co
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.UnitTest", "ConsoleApp.UnitTest\ConsoleApp.UnitTest.csproj", "{FF7B85A4-0687-4306-8B8A-709F467157F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.Models", "ConsoleApp.Models\ConsoleApp.Models.csproj", "{BB059262-99B7-49DB-BC74-0A7631E7B718}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Models", "ConsoleApp.Models\ConsoleApp.Models.csproj", "{BB059262-99B7-49DB-BC74-0A7631E7B718}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.Common", "ConsoleApp.Common\ConsoleApp.Common.csproj", "{920B8C1C-5A89-49B7-AF34-350F14CF59E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Common", "ConsoleApp.Common\ConsoleApp.Common.csproj", "{920B8C1C-5A89-49B7-AF34-350F14CF59E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.Services", "ConsoleApp.Services\ConsoleApp.Services.csproj", "{CF5FF4A7-178E-45F2-BAEB-741697E5484F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Services", "ConsoleApp.Services\ConsoleApp.Services.csproj", "{CF5FF4A7-178E-45F2-BAEB-741697E5484F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Snippets", "SQL Snippets", "{DFF70AC0-95AB-4DDB-A0E0-254C9D655A6E}"
+	ProjectSection(SolutionItems) = preProject
+		SQL Snippets\comma_separated_values.sql = SQL Snippets\comma_separated_values.sql
+		SQL Snippets\email_trigger.sql = SQL Snippets\email_trigger.sql
+		SQL Snippets\sp_FindText.sql = SQL Snippets\sp_FindText.sql
+		SQL Snippets\split_ints_function.sql = SQL Snippets\split_ints_function.sql
+		SQL Snippets\try_catch_in_transaction.sql = SQL Snippets\try_catch_in_transaction.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
