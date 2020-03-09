@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleApp
@@ -234,6 +235,18 @@ namespace ConsoleApp
             {
                 Console.WriteLine(ex.Message);
             }
+        }
+
+        public static void Async_Stream()
+        {
+            var cts = new CancellationTokenSource();
+
+            Console.CancelKeyPress += (s, e) =>
+            {
+                cts.Cancel();
+            };
+
+            AsyncUtil.GetSequenceAsync(cts.Token).Wait();
         }
     }
 }

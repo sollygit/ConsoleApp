@@ -12,6 +12,7 @@ namespace ConsoleApp
         static void Run()
         {
             menu = new Menu()
+            .Add("Async Stream", () => { MenuAction.Async_Stream(); })
             .Add("Revese Words", () => { MenuAction.Reverse_Words(); })
             .Add("Linked List", () => { MenuAction.Linked_List(); })
             .Add("Is Palindrome", () => { MenuAction.IsPalindromeTest(); })
