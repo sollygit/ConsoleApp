@@ -3,7 +3,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE FUNCTION [dbo].[split_ints] (
+CREATE FUNCTION [Ints_Split] (
 	@List      VARCHAR(MAX),
 	@Delimiter VARCHAR(255)
 )
@@ -18,14 +18,12 @@ RETURN (
 		) AS y
 	WHERE Item IS NOT NULL
 );
-
 /*
 C# Code:
 	command.Parameters.AddWithValue("@TechnologyList", String.Join(",", customer.TechnologyList.Select(t => t.TechnologyId)));
 SP Use:
 	@TechnologyList varchar(max) (Represents a comma seperated values of ints: 1,2,3,4)
 	INSERT INTO [CustomerTechnology] (CustomerID, TechnologyID)
-	SELECT @CustomerID, TechnologyID = Item FROM dbo.SplitInts(@TechnologyList, ',')
+	SELECT @CustomerID, TechnologyID = Item FROM Ints_Split(@TechnologyList, ',')
 */
-
 GO
