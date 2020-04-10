@@ -18,7 +18,6 @@ RETURN (
 		) AS y
 	WHERE Item IS NOT NULL
 );
-GO
 
 /*
 C# Code:
@@ -28,3 +27,5 @@ SP Use:
 	INSERT INTO [CustomerTechnology] (CustomerID, TechnologyID)
 	SELECT @CustomerID, TechnologyID = Item FROM dbo.SplitInts(@TechnologyList, ',')
 */
+
+GO
