@@ -82,7 +82,7 @@ namespace ConsoleApp
         {
             try
             {
-                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["CSV_Path"]}");
+                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["Shared_Path"]}");
                 var text = reader.ReadToEnd();
                 var json = text.CsvToJson();
 

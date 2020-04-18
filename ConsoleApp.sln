@@ -13,21 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Common", "Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Services", "ConsoleApp.Services\ConsoleApp.Services.csproj", "{CF5FF4A7-178E-45F2-BAEB-741697E5484F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Snippets", "SQL Snippets", "{DFF70AC0-95AB-4DDB-A0E0-254C9D655A6E}"
-	ProjectSection(SolutionItems) = preProject
-		SQL Snippets\comma_separated_values.sql = SQL Snippets\comma_separated_values.sql
-		SQL Snippets\email_trigger.sql = SQL Snippets\email_trigger.sql
-		SQL Snippets\northwind_join.sql = SQL Snippets\northwind_join.sql
-		SQL Snippets\sp_find_text.sql = SQL Snippets\sp_find_text.sql
-		SQL Snippets\split_ints_function.sql = SQL Snippets\split_ints_function.sql
-		SQL Snippets\try_catch_in_transaction.sql = SQL Snippets\try_catch_in_transaction.sql
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PS Scripts", "PS Scripts", "{955F5CCD-684D-491B-A411-FD7DD4B3CE81}"
-	ProjectSection(SolutionItems) = preProject
-		PS Scripts\blob-file-upload.ps1 = PS Scripts\blob-file-upload.ps1
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
