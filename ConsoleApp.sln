@@ -17,9 +17,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Snippets", "SQL Snippet
 	ProjectSection(SolutionItems) = preProject
 		SQL Snippets\comma_separated_values.sql = SQL Snippets\comma_separated_values.sql
 		SQL Snippets\email_trigger.sql = SQL Snippets\email_trigger.sql
-		SQL Snippets\sp_FindText.sql = SQL Snippets\sp_FindText.sql
+		SQL Snippets\northwind_join.sql = SQL Snippets\northwind_join.sql
+		SQL Snippets\sp_find_text.sql = SQL Snippets\sp_find_text.sql
 		SQL Snippets\split_ints_function.sql = SQL Snippets\split_ints_function.sql
 		SQL Snippets\try_catch_in_transaction.sql = SQL Snippets\try_catch_in_transaction.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PS Scripts", "PS Scripts", "{955F5CCD-684D-491B-A411-FD7DD4B3CE81}"
+	ProjectSection(SolutionItems) = preProject
+		PS Scripts\blob-file-upload.ps1 = PS Scripts\blob-file-upload.ps1
 	EndProjectSection
 EndProject
 Global
