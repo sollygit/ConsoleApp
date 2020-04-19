@@ -1,5 +1,5 @@
 SELECT COUNT(*) AS [Number of Employees] FROM Employees;
-SELECT TOP (10) ProductName FROM Products WHERE ProductName LIKE 'A%'
+SELECT TOP (10) ProductName FROM Products WHERE ProductName LIKE 'A%';
 SELECT TOP (10) ProductName FROM Products WHERE ProductName > 'A' and ProductName < 'C'
 SELECT TOP (10) ProductName FROM Products ORDER BY ProductName
 
