@@ -1,19 +1,33 @@
-﻿using NUnit.Framework;
+﻿using Microsoft.Extensions.Configuration;
+using NUnit.Framework;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Threading;
 
 namespace ConsoleApp.UnitTest
 {
     [TestFixture]
     public class DownloadUnitTest
     {
-        // Mock a 5 sec delay to a page resource
-        readonly string url = "http://deelay.me/5000/http://www.delsink.com";
+        string url;
 
-        [Test]
-        public void Test_Download()
+        [OneTimeSetUp]
+        public void Init()
         {
+            var config = new ConfigurationBuilder()
+                .AddJsonFile("appSettings.json")
+                .Build();
+            
+            url = config["Download_URI"];
+        }
+        
+        [Test]
+        public void Test_Download_Sync()
+        {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+
             var request = WebRequest.CreateHttp(url);
             // Initial round trip to the server
             var response = request.GetResponse() as HttpWebResponse;
@@ -27,17 +41,21 @@ namespace ConsoleApp.UnitTest
         // This method would run in the main thread
         public void Test_Download_Async()
         {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+
             var request = WebRequest.CreateHttp(url);
             var callback = new AsyncCallback(HttpResponseAvailable);
             var ar = request.BeginGetResponse(callback, request); // Initial round trip to the server
 
-            // await completion before exiting main thread
+            // Wait for the background thread to complete
             ar.AsyncWaitHandle.WaitOne();
         }
 
         // This method would run in a background thread
         private static void HttpResponseAvailable(IAsyncResult ar)
         {
+            Debug.WriteLine(Thread.CurrentThread.ManagedThreadId.ToString());
+
             var request = ar.AsyncState as HttpWebRequest;
             var response = request.EndGetResponse(ar) as HttpWebResponse;
             var stream = response.GetResponseStream(); // Downloading page content
