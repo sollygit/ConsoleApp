@@ -4,6 +4,7 @@ using ConsoleApp.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
@@ -93,7 +94,8 @@ namespace ConsoleApp
 
                 foreach (var item in todoItems)
                 {
-                    Console.WriteLine($"{item.Name}, {item.IsComplete}, {item.OwnerId}");
+                    var (id, name, isComplete, ownerId) = item;
+                    Console.WriteLine($"{name}, {isComplete}, {ownerId}");
                 }
             }
 
