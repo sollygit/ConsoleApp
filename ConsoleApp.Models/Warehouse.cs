@@ -28,12 +28,8 @@ namespace ConsoleApp.Models
         // The method which fires the Event
         public void OnPropertyChange(object sender, PropertyChangeEventArgs data)
         {
-            // Check if there are any Subscribers
-            if (PropertyChange != null)
-            {
-                // Call the Event
-                PropertyChange(this, data);
-            }
+            // Ensure to have any Subscribers and invoke the Event
+            PropertyChange?.Invoke(this, data);
         }
     }
 
@@ -45,9 +41,9 @@ namespace ConsoleApp.Models
 
         public PropertyChangeEventArgs(string propertyName, string oldValue, string newValue)
         {
-            this.PropertyName = propertyName;
-            this.OldValue = oldValue;
-            this.NewValue = newValue;
+            PropertyName = propertyName;
+            OldValue = oldValue;
+            NewValue = newValue;
         }
     }
 

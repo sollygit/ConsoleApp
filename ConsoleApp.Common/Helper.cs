@@ -5,6 +5,7 @@ using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using ConsoleApp.Models;
+using System.Diagnostics;
 
 namespace ConsoleApp.Common
 {
@@ -188,15 +189,10 @@ namespace ConsoleApp.Common
         public static IEnumerable<T> Deserialize<T>(string json) where T : class
         {
             var technologies = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
-
-            foreach (var t in technologies)
-            {
-                Console.WriteLine(t);
-            }
-
             var jsonTechnologies = technologies.ToJson();
 
-            Console.WriteLine(JToken.Parse(jsonTechnologies).ToString(Formatting.None));
+            // Ensure technologies is valid JSON and output to debug console
+            Debug.WriteLine(JToken.Parse(jsonTechnologies).ToString(Formatting.None));
 
             return technologies;
         }

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ChoETL;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -27,12 +28,6 @@ namespace ConsoleApp.Common
             return JsonConvert.DeserializeObject<T>(json);
         }
 
-        /// <summary>
-        /// Converts a CSV string to a Json array format.
-        /// </summary>
-        /// <remarks>First line in CSV must be a header with field name columns.</remarks>
-        /// <param name="value"></param>
-        /// <returns></returns>
         public static string CsvToJson(this string value)
         {
             // Get lines.
@@ -59,6 +54,22 @@ namespace ConsoleApp.Common
                 sb.AppendLine(jsonObject);
             }
             sb.AppendLine("]");
+
+            return sb.ToString();
+        }
+
+        public static string CsvToJson2(this string value)
+        {
+            if (string.IsNullOrEmpty(value)) throw new Exception("Value is required");
+
+            var sb = new StringBuilder();
+            var reader = ChoCSVReader.LoadText(value).WithFirstLineHeader();
+
+            using (var p = reader)
+            {
+                using var w = new ChoJSONWriter(sb);
+                w.Write(p);
+            }
 
             return sb.ToString();
         }
