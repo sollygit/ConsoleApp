@@ -4,18 +4,21 @@ namespace ConsoleApp.Models
 {
     public class Product
     {
-        private string name;
-        public string Name
+        string productName;
+
+        public int ProductId { get; set; }
+        public string ProductName
         {
             get
             {
-                return this.name;
+                return productName;
             }
             set
             {
-                string old = this.name;
-                this.name = value;
-                OnPropertyChange(this, new PropertyChangeEventArgs("Name", old, value));
+                string old = productName;
+                productName = value;
+
+                OnPropertyChange(this, new PropertyChangeEventArgs("ProductName", old, value));
             }
         }
 
@@ -46,5 +49,23 @@ namespace ConsoleApp.Models
             this.OldValue = oldValue;
             this.NewValue = newValue;
         }
+    }
+
+    public class RetailerProduct
+    {
+        public int ProductId { get; set; }
+        public string RetailerName { get; set; }
+        public string RetailerProductCode { get; set; }
+        public string RetailerProductCodeType { get; set; }
+        public DateTime DateReceived { get; set; }
+    }
+
+    public class OutputProduct
+    {
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string CodeType { get; set; }
+        public string Code { get; set; }
+        public DateTime DateReceived { get; set; }
     }
 }

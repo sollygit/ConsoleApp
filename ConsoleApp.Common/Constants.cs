@@ -1,4 +1,4 @@
-﻿namespace ConsoleApp.Models
+﻿namespace ConsoleApp.Common
 {
     public class Constants
     {

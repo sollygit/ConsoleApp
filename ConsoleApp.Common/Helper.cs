@@ -185,13 +185,13 @@ namespace ConsoleApp.Common
             return words;
         }
 
-        public static IEnumerable<Technology> DeserializeTechnology(string json)
+        public static IEnumerable<T> Deserialize<T>(string json) where T : class
         {
-            var technologies = JsonConvert.DeserializeObject<IEnumerable<Technology>>(json);
+            var technologies = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
 
             foreach (var t in technologies)
             {
-                Console.WriteLine($"TechnologyId: {t.TechnologyId} TechnologyName: {t.TechnologyName}");
+                Console.WriteLine(t);
             }
 
             var jsonTechnologies = technologies.ToJson();

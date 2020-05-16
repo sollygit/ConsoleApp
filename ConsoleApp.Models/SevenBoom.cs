@@ -14,8 +14,6 @@ namespace ConsoleApp.Models
         public delegate void SevenBoom(object sender ,PropertyEventArgs e);
         public event SevenBoom OnSevenBoom;
 
-        Random random = new Random();
-
         public int Counter { get; set; }
 
         public void InvokeSevenBoom(object sender, PropertyEventArgs e)
@@ -31,11 +29,12 @@ namespace ConsoleApp.Models
         public void GeneateRandome(int numberToFind, int maxValue)
         {
             Counter++;
-            var number = random.Next(maxValue);
+            
+            var number = new Random().Next(maxValue);
 
             if (number % numberToFind == 0)
             {
-                Console.Write($"{number} - Boom! ");
+                Console.Write($"{number} - Boom!");
                 InvokeSevenBoom(this, new PropertyEventArgs(Counter));
             }
             else
@@ -56,12 +55,12 @@ namespace ConsoleApp.Models
         }
     }
 
-    public static class Lottery
+    public static class SevenBoom
     {
         static readonly int winnerNumber = 7;
         static readonly int poolOfNumbers = 100;
 
-        public static void Test()
+        public static void Run()
         {
             var loto = new Loto();
             loto.OnSevenBoom += OnSevenBoom;

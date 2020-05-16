@@ -4,12 +4,10 @@ using ConsoleApp.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
@@ -19,8 +17,8 @@ namespace ConsoleApp
         {
             var Product = new Product();
             Product.PropertyChange += new Product.PropertyChangeHandler(PropertyHasChanged);
-            Product.Name = "First Name";
-            Product.Name = "Second Name";
+            Product.ProductName = "First Name";
+            Product.ProductName = "Second Name";
         }
 
         public static void PropertyHasChanged(object sender, PropertyChangeEventArgs data)
@@ -79,10 +77,32 @@ namespace ConsoleApp
             Console.WriteLine($"The number is {number}");
         }
 
-        public static void CsvToJson()
+        public static void FizzBuzz()
         {
             try
             {
+                string counter;
+                Console.Write("Please enter a FizzBuzz counter:");
+                while (String.IsNullOrEmpty(counter = Console.ReadLine().Trim()))
+                {
+                    Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
+                }
+
+                new FizzBuzz().Start(Convert.ToInt32(counter), OutputType.Console);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        public static void Json_Csv_Manipulate()
+        {
+            try
+            {
+                Helper.Deserialize<Technology>(Constants.JSON_TECHNOLOGIES);
+
                 using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["Shared_Path"]}");
                 var text = reader.ReadToEnd();
                 var json = text.CsvToJson();
@@ -105,60 +125,9 @@ namespace ConsoleApp
             }
         }
 
-        public static void FizzBuzz()
+        public static void RunSevenBoom()
         {
-            try
-            {
-                string counter;
-                Console.Write("Please enter a FizzBuzz counter:");
-                while (String.IsNullOrEmpty(counter = Console.ReadLine().Trim()))
-                {
-                    Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
-                }
-
-                new FizzBuzz().Start(Convert.ToInt32(counter), OutputType.Console);
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public async static void Forcasts_AsyncEnumerable()
-        {
-            await foreach (var forcast in forecasts())
-            {
-                Console.WriteLine($"{forcast}");
-            }
-
-            // Declare a local function.
-            static async IAsyncEnumerable<WeatherForecast> forecasts()
-            {
-                var rng = new Random();
-
-                for (int i = 0; i < 10; i++)
-                {
-                    await Task.Delay(1000); // Simulate waiting for data to come through. 
-
-                    yield return new WeatherForecast
-                    {
-                        Date = Helper.GetRandomDate(DateTime.Now, DateTime.Now.AddYears(1)),
-                        TemperatureC = rng.Next(-20, 55),
-                        Summary = Constants.SUMMARIES[rng.Next(Constants.SUMMARIES.Length)]
-                    };
-                }
-            }
-        }
-
-        public static void JSON_Deserialize()
-        {
-            Helper.DeserializeTechnology(Constants.JSON_TECHNOLOGIES);
-        }
-
-        public static void Lotto()
-        {
-            Lottery.Test();
+            SevenBoom.Run();
         }
 
         public static void CustomSort()
@@ -239,7 +208,7 @@ namespace ConsoleApp
             }
         }
 
-        public static void Async_Stream()
+        public static void Forcasts_AsyncEnumerable()
         {
             var cts = new CancellationTokenSource();
 
@@ -248,7 +217,7 @@ namespace ConsoleApp
                 cts.Cancel();
             };
 
-            AsyncUtil.GetSequenceAsync(cts.Token).Wait();
+            AsyncHelper.GetWeatherForecastAsync(cts.Token).Wait();
         }
     }
 }
