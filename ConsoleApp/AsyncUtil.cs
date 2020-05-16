@@ -9,6 +9,8 @@ namespace ConsoleApp
     {
         public static async Task GetSequenceAsync(CancellationToken token)
         {
+            token.Register(new Action(() => Console.WriteLine("Operation Canceled!")));
+            
             await foreach (var number in GenerateSequence())
             {
                 Console.WriteLine($"The time is {DateTime.Now:hh:mm:ss}. Retrieved {number}");

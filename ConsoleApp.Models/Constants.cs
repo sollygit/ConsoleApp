@@ -2,8 +2,6 @@
 {
     public class Constants
     {
-        public static readonly string Alphabet = "abcdefghijklmnopqrstuvwxyz0123456789";
-
         public const string JSON_TECHNOLOGIES = "[" +
             "{ \"technologyId\": 1, \"technologyName\": \"Azure\" }," +
             "{ \"technologyId\": 2, \"technologyName\": \"SQL\" }," +
