@@ -1,7 +1,6 @@
 ﻿using ConsoleApp.Service;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Configuration;
 
 namespace ConsoleApp.Actions
 {
@@ -10,8 +9,7 @@ namespace ConsoleApp.Actions
         public static void Products()
         {
             var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
-            var path = ConfigurationManager.AppSettings["Products"];
-            var products = warehouseService.GetProducts(path);
+            var products = warehouseService.GetProducts();
 
             foreach (var p in products)
             {
@@ -22,8 +20,7 @@ namespace ConsoleApp.Actions
         public static void RetailerProducts()
         {
             var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
-            var path = ConfigurationManager.AppSettings["RetailerProducts"];
-            var retailerProducts = warehouseService.GetRetailerProducts(path);
+            var retailerProducts = warehouseService.GetRetailerProducts();
 
             foreach (var p in retailerProducts)
             {
