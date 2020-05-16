@@ -3,13 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Configuration;
 
-namespace ConsoleApp
+namespace ConsoleApp.Actions
 {
-    static class WarehouseAction
+    static class Warehouse
     {
-        public static void Products(ServiceProvider serviceProvider)
+        public static void Products()
         {
-            var warehouseService = serviceProvider.GetService<IWarehouseService>();
+            var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
             var path = ConfigurationManager.AppSettings["Products"];
             var products = warehouseService.GetProducts(path);
 
@@ -19,9 +19,9 @@ namespace ConsoleApp
             }
         }
 
-        public static void RetailerProducts(ServiceProvider serviceProvider)
+        public static void RetailerProducts()
         {
-            var warehouseService = serviceProvider.GetService<IWarehouseService>();
+            var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
             var path = ConfigurationManager.AppSettings["RetailerProducts"];
             var retailerProducts = warehouseService.GetRetailerProducts(path);
 
@@ -31,9 +31,9 @@ namespace ConsoleApp
             }
         }
 
-        public static void OutputProducts(ServiceProvider serviceProvider)
+        public static void OutputProducts()
         {
-            var warehouseService = serviceProvider.GetService<IWarehouseService>();
+            var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
             var outputProducts = warehouseService.GetOutputProducts();
 
             foreach (var p in outputProducts)

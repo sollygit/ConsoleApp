@@ -10,9 +10,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
-namespace ConsoleApp
+namespace ConsoleApp.Actions
 {
-    static class MenuAction
+    static class Functions
     {
         public static void Reverse_Words()
         {
