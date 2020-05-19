@@ -1,96 +1,44 @@
-﻿using ConsoleApp.Common;
-using ConsoleApp.Models;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using ConsoleApp.Models;
+using ConsoleApp.Repository;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 
 namespace ConsoleApp.Service
 {
     public interface IWarehouseService
     {
-        IEnumerable<Product> GetProducts();
-        IEnumerable<RetailerProduct> GetRetailerProducts();
-        IEnumerable<OutputProduct> GetOutputProducts();
+        IEnumerable<Product> ProductsAll();
+        IEnumerable<RetailerProduct> RetailerProductsAll();
+        IEnumerable<OutputProduct> OutputProducts();
     }
 
     public class WarehouseService : IWarehouseService
     {
-        readonly ILogger _logger;
-        IEnumerable<Product> products;
-        IEnumerable<RetailerProduct> retailerProducts;
-
-        public WarehouseService(ILogger<WarehouseService> logger)
+        readonly IWarehouseRepository _warehouseRepository;
+        
+        public WarehouseService(IWarehouseRepository warehouseRepository)
         {
-            _logger = logger;
-            InitWarehouse();
+            _warehouseRepository = warehouseRepository;            
         }
 
-        public void InitWarehouse()
+        public IEnumerable<Product> ProductsAll()
         {
-            GetProducts();
-            GetRetailerProducts();
+            return _warehouseRepository.Products;
         }
 
-        public IEnumerable<Product> GetProducts()
+        public IEnumerable<RetailerProduct> RetailerProductsAll()
         {
-            if (products != null) return products;
-
-            try
-            {
-                var path = ConfigurationManager.AppSettings["Products"];
-                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{path}");
-                var text = reader.ReadToEnd();
-                var json = text.CsvToJson2();
-
-                // Output Products JSON to Debug console
-                Debug.WriteLine($"Products: {JToken.Parse(json).ToString(Formatting.Indented)}");
-
-                products = json.FromJson<IEnumerable<Product>>().ToList();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-            }
-
-            return products;
+            return _warehouseRepository.RetailerProducts;
         }
 
-        public IEnumerable<RetailerProduct> GetRetailerProducts()
+        public IEnumerable<OutputProduct> OutputProducts()
         {
-            if (retailerProducts != null) return retailerProducts;
+            var map = new Dictionary<string, OutputProduct>();
 
-            try
-            {
-                var path = ConfigurationManager.AppSettings["RetailerProducts"];
-                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{path}");
-                var text = reader.ReadToEnd();
-                var json = text.CsvToJson2();
-
-                retailerProducts = json.FromJson<IEnumerable<RetailerProduct>>()
-                    .Where(o => o.ProductId != 0);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex.Message);
-            }
-
-            return retailerProducts;
-        }
-
-        public IEnumerable<OutputProduct> GetOutputProducts()
-        {
-            var dictionary = new Dictionary<string, OutputProduct>();
-
-            foreach (var retail in retailerProducts)
+            foreach (var retail in _warehouseRepository.RetailerProducts)
             {
                 // Get the master product
-                var master = products.Where(o => o.ProductId == retail.ProductId).SingleOrDefault();
+                var master = _warehouseRepository.Products.Where(o => o.ProductId == retail.ProductId).SingleOrDefault();
 
                 var outputProduct = new OutputProduct()
                 {
@@ -104,22 +52,21 @@ namespace ConsoleApp.Service
                 // Create a unique dictionary key: ProductId-CodeType
                 var key = $"{outputProduct.ProductId}-{outputProduct.CodeType}";
 
-                if (!dictionary.ContainsKey(key))
+                if (!map.ContainsKey(key))
                 {
-                    dictionary.Add(key, outputProduct);
+                    map.Add(key, outputProduct);
                 }
                 else
                 {
                     // Ensure we keep the latest DateReceived
-                    if (dictionary[key].DateReceived < retail.DateReceived)
+                    if (map[key].DateReceived < retail.DateReceived)
                     {
-                        dictionary[key].DateReceived = retail.DateReceived;
-                        dictionary[key].Code = retail.RetailerProductCode;
+                        map[key].DateReceived = retail.DateReceived;
+                        map[key].Code = retail.RetailerProductCode;
                     }
                 }
             }
-
-            return dictionary.Values.ToList();
+            return map.Values.ToList();
         }
     }
 }

@@ -5,11 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="3.1.3" />
-  </ItemGroup>
-      
-  <ItemGroup>
-    <ProjectReference Include="..\ConsoleApp.Common\ConsoleApp.Common.csproj" />
+    <ProjectReference Include="..\ConsoleApp.Repository\ConsoleApp.Repository.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Actions;
 using ConsoleApp.Models;
+using ConsoleApp.Repository;
 using ConsoleApp.Service;
 using EasyConsoleCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,11 +52,12 @@ namespace ConsoleApp
 
         static void Main()
         {
-            // Setup services
+            // Configure services
             var services = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
                 .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
-                .AddSingleton<IWarehouseService, WarehouseService>();
+                .AddSingleton<IWarehouseRepository, WarehouseRepository>()
+                .AddScoped<IWarehouseService, WarehouseService>();
 
             ServiceProvider = services.BuildServiceProvider();
 

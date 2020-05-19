@@ -9,7 +9,7 @@ namespace ConsoleApp.Actions
         public static void Products()
         {
             var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
-            var products = warehouseService.GetProducts();
+            var products = warehouseService.ProductsAll();
 
             foreach (var p in products)
             {
@@ -20,7 +20,7 @@ namespace ConsoleApp.Actions
         public static void RetailerProducts()
         {
             var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
-            var retailerProducts = warehouseService.GetRetailerProducts();
+            var retailerProducts = warehouseService.RetailerProductsAll();
 
             foreach (var p in retailerProducts)
             {
@@ -31,7 +31,7 @@ namespace ConsoleApp.Actions
         public static void OutputProducts()
         {
             var warehouseService = Program.ServiceProvider.GetService<IWarehouseService>();
-            var outputProducts = warehouseService.GetOutputProducts();
+            var outputProducts = warehouseService.OutputProducts();
 
             foreach (var p in outputProducts)
             {
