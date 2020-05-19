@@ -1,11 +1,10 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using ConsoleApp.Models;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace ConsoleApp.Common
 {
@@ -37,13 +36,11 @@ namespace ConsoleApp.Common
                 .GroupBy(x => x)
                 .OrderBy(x => x.Key)
                 .OrderBy(x => x.Count())
-                .SelectMany(x => x)
-                .ToList();
+                .SelectMany(x => x);
 
-            foreach (var number in numbers)
-            {
-                Console.WriteLine(number);
-            }
+            // Input:  8, 2, 2, 7, 5, 1, 8, 5, 3, 5
+            // Output: 1, 3, 7, 2, 2, 8, 8, 5, 5, 5
+            Console.Write(string.Join(',', numbers));
         }
 
         public static int Fibonatchi(int position)

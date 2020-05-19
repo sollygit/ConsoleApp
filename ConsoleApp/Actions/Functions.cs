@@ -87,7 +87,6 @@ namespace ConsoleApp.Actions
 
         public static void CustomSort()
         {
-            // Output: 1, 3, 7, 2, 2, 8, 8, 5, 5, 5 
             Helper.CustomSort(new int[] { 8, 2, 2, 7, 5, 1, 8, 5, 3, 5 });
         }
 
