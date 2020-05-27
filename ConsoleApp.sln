@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Common", "Consol
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Services", "ConsoleApp.Services\ConsoleApp.Services.csproj", "{CF5FF4A7-178E-45F2-BAEB-741697E5484F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp.Repository", "ConsoleApp.Repository\ConsoleApp.Repository.csproj", "{E219D27B-F6C0-4963-9550-8D3F5BFBBE63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Repository", "ConsoleApp.Repository\ConsoleApp.Repository.csproj", "{E219D27B-F6C0-4963-9550-8D3F5BFBBE63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

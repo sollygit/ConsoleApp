@@ -34,6 +34,7 @@ namespace ConsoleApp
             .Add("Facebook Public Profile", new Action(Functions.Facebook_Profile))
             .Add("Facebook Search Query", new Action(Functions.Facebook_SearchQuery))
             .Add("Async Enumerable Forcasts", new Action(Functions.Forcasts_AsyncEnumerable))
+            .Add("Quadratic Calculation", new Action(Functions.FindRoots))
 
             // Warehouse
             .Add("Products", new Action(Warehouse.Products))

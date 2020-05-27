@@ -101,9 +101,9 @@ namespace ConsoleApp.Common
         {
             Console.WriteLine($"Before: x={x}, y={y}");
 
-            x = x ^ y;
+            x ^= y;
             y = x ^ y;
-            x = x ^ y;
+            x ^= y;
 
             Console.WriteLine($"After: x={x}, y={y}");
 
@@ -201,6 +201,37 @@ namespace ConsoleApp.Common
             var randTimeSpan = new TimeSpan((long)(rnd.NextDouble() * range.Ticks));
 
             return from + randTimeSpan;
+        }
+
+        public static Tuple<double, double> FindRoots(double a, double b, double c)
+        {
+            int m;
+            double r1, r2, d1;
+            d1 = b * b - 4 * a * c;
+            if (a == 0)
+                m = 1;
+            else if (d1 > 0)
+                m = 2;
+            else if (d1 == 0)
+                m = 3;
+            else
+                m = 4;
+
+            switch (m)
+            {
+                case 1:
+                case 2:
+                    r1 = (-b + Math.Sqrt(d1)) / (2 * a);
+                    r2 = (-b - Math.Sqrt(d1)) / (2 * a);
+                    return new Tuple<double, double>(r1, r2);
+                case 3:
+                    r1 = (-b) / (2 * a);
+                    return new Tuple<double, double>(r1, r1);
+                default:
+                    r1 = (-b) / (2 * a);
+                    r2 = Math.Sqrt(-d1) / (2 * a);
+                    return new Tuple<double, double>(r1, r2);
+            }
         }
     }
 }

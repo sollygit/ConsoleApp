@@ -221,5 +221,12 @@ namespace ConsoleApp.Actions
 
             AsyncHelper.GetWeatherForecastAsync(cts.Token).Wait();
         }
+
+        public static void FindRoots()
+        {
+            Console.WriteLine("The Roots of Quadratic Equation 2x^ + 10x + 8 = 0");
+            var result = Helper.FindRoots(2, 10, 8);
+            Console.WriteLine($"{result.Item1}, {result.Item2}");
+        }
     }
 }
