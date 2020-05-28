@@ -1,6 +1,7 @@
-﻿using System;
+﻿using ConsoleApp.Models;
+using System;
 
-namespace ConsoleApp.Models
+namespace ConsoleApp.Common
 {
     public static class LinkedList
     {
