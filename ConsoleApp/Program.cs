@@ -30,6 +30,7 @@ namespace ConsoleApp
             .Add("Seven Boom", new Action(Functions.RunSevenBoom))
             .Add("Fizz Buzz", new Action(Functions.FizzBuzz))
             .Add("JSON CSV Manipulation", new Action(Functions.Json_Csv_Manipulation))
+            .Add("Xml Folders", new Action(Functions.XmlFolders))
             .Add("Youtube Data API", new Action(Functions.Youtube_SearchQuery))
             .Add("Facebook Public Profile", new Action(Functions.Facebook_Profile))
             .Add("Facebook Search Query", new Action(Functions.Facebook_SearchQuery))

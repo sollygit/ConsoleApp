@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -7,7 +6,7 @@ namespace ConsoleApp.Common
 {
     public static class XmlHelper
     {
-        public static IEnumerable<string> FolderNames(string xml, char startingLetter)
+        public static IEnumerable<string> GetFolders(string xml, char startingLetter)
         {
             var doc = XDocument.Parse(xml);
             var folders = doc.Descendants("folder");

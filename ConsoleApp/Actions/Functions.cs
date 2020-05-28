@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 
 namespace ConsoleApp.Actions
@@ -227,6 +228,14 @@ namespace ConsoleApp.Actions
             Console.WriteLine("The Roots of Quadratic Equation 2x^ + 10x + 8 = 0");
             var result = Helper.FindRoots(2, 10, 8);
             Console.WriteLine($"{result.Item1}, {result.Item2}");
+        }
+
+        public static void XmlFolders()
+        {
+            using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["XmlFile"]}");
+            var xml = reader.ReadToEnd();
+            var names = XmlHelper.GetFolders(xml, 'u');
+            Console.WriteLine(string.Join(',', names));
         }
     }
 }
