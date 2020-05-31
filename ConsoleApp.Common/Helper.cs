@@ -197,7 +197,7 @@ namespace ConsoleApp.Common
 
         public static IEnumerable<T> DeserializeChoETL<T>(string path, string[] cols) where T : class
         {
-            var todos = new List<T>();
+            var items = new List<T>();
             var config = new ChoCSVRecordConfiguration();
 
             for (int i = 0; i < cols.Length; i++)
@@ -207,10 +207,10 @@ namespace ConsoleApp.Common
 
             foreach (var item in new ChoCSVReader<T>(path, config).WithFirstLineHeader())
             {
-                todos.Add(item);
+                items.Add(item);
             }
 
-            return todos;
+            return items;
         }
 
         public static DateTime GetRandomDate(DateTime from, DateTime to)
