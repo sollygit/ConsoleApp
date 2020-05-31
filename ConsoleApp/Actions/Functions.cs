@@ -4,9 +4,7 @@ using ConsoleApp.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 
@@ -115,25 +113,27 @@ namespace ConsoleApp.Actions
             }
         }
 
-        public static void Json_Csv_Manipulation()
+        public static void JSON_To_Model()
+        {
+            var json = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["Technologies"]}");
+            var technologies = Helper.Deserialize<Technology>(json);
+
+            foreach (var t in technologies)
+            {
+                Console.WriteLine($"{t.TechnologyId}:{t.TechnologyName}");
+            }
+        }
+
+        public static void CSV_To_Model()
         {
             try
             {
-                Helper.Deserialize<Technology>(Constants.JSON_TECHNOLOGIES);
+                var path = $"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["TodoItems"]}";
+                var todos = Helper.DeserializeChoETL<TodoItem>(path, new string[] { "IsComplete", "Name", "OwnerId" });
 
-                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["TodoItems"]}");
-                var text = reader.ReadToEnd();
-                var json = text.CsvToJson2();
-
-                // Output TodoItems JSON to Debug console
-                Debug.WriteLine(JToken.Parse(json).ToString(Formatting.Indented));
-
-                var todoItems = json.FromJson<IEnumerable<TodoItem>>();
-
-                foreach (var item in todoItems)
+                foreach (var item in todos)
                 {
-                    var (id, name, isComplete, ownerId) = item;
-                    Console.WriteLine($"{name}, {isComplete}, {ownerId}");
+                    Console.WriteLine($"{item.IsComplete},{item.Name},{item.OwnerId}");
                 }
             }
 

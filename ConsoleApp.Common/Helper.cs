@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ChoETL;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -192,6 +193,24 @@ namespace ConsoleApp.Common
             Debug.WriteLine(JToken.Parse(jsonTechnologies).ToString(Formatting.None));
 
             return technologies;
+        }
+
+        public static IEnumerable<T> DeserializeChoETL<T>(string path, string[] cols) where T : class
+        {
+            var todos = new List<T>();
+            var config = new ChoCSVRecordConfiguration();
+
+            for (int i = 0; i < cols.Length; i++)
+            {
+                config.CSVRecordFieldConfigurations.Add(new ChoCSVRecordFieldConfiguration(cols[i], i+1));
+            }
+
+            foreach (var item in new ChoCSVReader<T>(path, config).WithFirstLineHeader())
+            {
+                todos.Add(item);
+            }
+
+            return todos;
         }
 
         public static DateTime GetRandomDate(DateTime from, DateTime to)
