@@ -38,7 +38,7 @@ namespace ConsoleApp.Repository
             {
                 var path = ConfigurationManager.AppSettings["Products"];
                 var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
-                Products = Helper.DeserializeChoETL<Product>(path, new string[] { "ProductId", "ProductName" });
+                Products = Helper.Deserialize<Product>(path, new string[] { "ProductId", "ProductName" });
             }
             catch (Exception ex)
             {
@@ -56,7 +56,7 @@ namespace ConsoleApp.Repository
             {
                 var path = ConfigurationManager.AppSettings["RetailerProducts"];
                 var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
-                RetailerProducts = Helper.DeserializeChoETL<RetailerProduct>(path, new string[] { 
+                RetailerProducts = Helper.Deserialize<RetailerProduct>(path, new string[] { 
                     "ProductId","RetailerName","RetailerProductCode","RetailerProductCodeType","DateReceived" })
                     .Where(o => o.ProductId != 0);
             }

@@ -129,7 +129,7 @@ namespace ConsoleApp.Actions
             try
             {
                 var path = $"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["TodoItems"]}";
-                var todos = Helper.DeserializeChoETL<TodoItem>(path, new string[] { "IsComplete", "Name", "OwnerId" });
+                var todos = Helper.Deserialize<TodoItem>(path, new string[] { "IsComplete", "Name", "OwnerId" });
 
                 foreach (var item in todos)
                 {

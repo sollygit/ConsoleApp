@@ -195,7 +195,7 @@ namespace ConsoleApp.Common
             return technologies;
         }
 
-        public static IEnumerable<T> DeserializeChoETL<T>(string path, string[] cols) where T : class
+        public static IEnumerable<T> Deserialize<T>(string path, string[] cols) where T : class
         {
             var items = new List<T>();
             var config = new ChoCSVRecordConfiguration();
