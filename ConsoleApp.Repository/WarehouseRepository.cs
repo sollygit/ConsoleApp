@@ -1,12 +1,9 @@
 ﻿using ConsoleApp.Common;
 using ConsoleApp.Models;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
@@ -40,14 +37,8 @@ namespace ConsoleApp.Repository
             try
             {
                 var path = ConfigurationManager.AppSettings["Products"];
-                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{path}");
-                var text = reader.ReadToEnd();
-                var json = text.CsvToJson2();
-
-                // Output Products JSON to Debug console
-                Debug.WriteLine($"Products: {JToken.Parse(json).ToString(Formatting.Indented)}");
-
-                Products = json.FromJson<IEnumerable<Product>>().ToList();
+                var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
+                Products = Helper.DeserializeChoETL<Product>(path, new string[] { "ProductId", "ProductName" });
             }
             catch (Exception ex)
             {
@@ -64,11 +55,9 @@ namespace ConsoleApp.Repository
             try
             {
                 var path = ConfigurationManager.AppSettings["RetailerProducts"];
-                using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{path}");
-                var text = reader.ReadToEnd();
-                var json = text.CsvToJson2();
-
-                RetailerProducts = json.FromJson<IEnumerable<RetailerProduct>>()
+                var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
+                RetailerProducts = Helper.DeserializeChoETL<RetailerProduct>(path, new string[] { 
+                    "ProductId","RetailerName","RetailerProductCode","RetailerProductCodeType","DateReceived" })
                     .Where(o => o.ProductId != 0);
             }
             catch (Exception ex)
