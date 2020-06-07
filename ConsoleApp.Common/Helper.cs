@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 
 namespace ConsoleApp.Common
 {
@@ -184,15 +185,26 @@ namespace ConsoleApp.Common
             return words;
         }
 
-        public static IEnumerable<T> Deserialize<T>(string json) where T : class
+        public static Dictionary<string, T> Deserialize<T>(string json) where T : class
         {
-            var technologies = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
-            var jsonTechnologies = technologies.ToJson();
+            var jsonOptions = new JsonSerializerOptions {
+                PropertyNameCaseInsensitive = true,
+                AllowTrailingCommas = true
+            };
+            var items = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, T>>(json, jsonOptions);
 
-            // Ensure technologies is valid JSON and output to debug console
-            Debug.WriteLine(JToken.Parse(jsonTechnologies).ToString(Formatting.None));
+            return items;
+        }
 
-            return technologies;
+        public static IEnumerable<T> DeserializeJson<T>(string json) where T : class
+        {
+            var items = JsonConvert.DeserializeObject<IEnumerable<T>>(json);
+            var jsonObj = items.ToJson();
+
+            // Ensure JSON is valid and output to debug console
+            Debug.WriteLine(JToken.Parse(jsonObj).ToString(Formatting.Indented));
+
+            return items;
         }
 
         public static IEnumerable<T> Deserialize<T>(string path, string[] cols) where T : class

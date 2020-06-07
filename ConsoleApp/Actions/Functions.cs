@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 using System.Threading;
 
 namespace ConsoleApp.Actions
@@ -115,12 +116,26 @@ namespace ConsoleApp.Actions
 
         public static void JSON_To_Model()
         {
-            var json = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["Technologies"]}");
-            var technologies = Helper.Deserialize<Technology>(json);
+            var json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}\{ConfigurationManager.AppSettings["Technologies"]}");
+            var technologies = Helper.DeserializeJson<Technology>(json)
+                .OrderBy(o => o.TechnologyId);
+            
+            Console.WriteLine($"{Environment.NewLine}Technologies:");
 
             foreach (var t in technologies)
             {
-                Console.WriteLine($"{t.TechnologyId}:{t.TechnologyName}");
+                Console.WriteLine($"{t.TechnologyId},{t.TechnologyName}");
+            }
+
+            json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}\{ConfigurationManager.AppSettings["Recipes"]}");
+            var recipes = Helper.Deserialize<Recipe>(json)
+                .OrderBy(o => o.Key);
+
+            Console.WriteLine($"{Environment.NewLine}Recipes:")
+;
+            foreach (var r in recipes)
+            {
+                Console.WriteLine($"{r.Key},{r.Value.Name},{r.Value.SourceShort}");
             }
         }
 
@@ -128,7 +143,7 @@ namespace ConsoleApp.Actions
         {
             try
             {
-                var path = $"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["TodoItems"]}";
+                var path = @$"{Directory.GetCurrentDirectory()}\{ConfigurationManager.AppSettings["TodoItems"]}";
                 var todos = Helper.Deserialize<TodoItem>(path, new string[] { "IsComplete", "Name", "OwnerId" });
 
                 foreach (var item in todos)
@@ -231,7 +246,7 @@ namespace ConsoleApp.Actions
 
         public static void XmlFolders()
         {
-            using var reader = new StreamReader($"{Directory.GetCurrentDirectory()}\\{ConfigurationManager.AppSettings["XmlFile"]}");
+            using var reader = new StreamReader(@$"{Directory.GetCurrentDirectory()}\{ConfigurationManager.AppSettings["XmlFile"]}");
             var xml = reader.ReadToEnd();
             var names = XmlHelper.GetFolders(xml, 'u');
             Console.WriteLine(string.Join(',', names));
