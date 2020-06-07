@@ -1,5 +1,6 @@
 ﻿using ConsoleApp.Common;
 using ConsoleApp.Models;
+using ConsoleApp.Services;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -22,13 +23,15 @@ namespace ConsoleApp.Service
         private IEnumerable<Product> products;
         private IEnumerable<RetailerProduct> retailerProducts;
 
+        public WarehouseSearchProvider SearchProvider { get; private set; }
+
         public WarehouseService(ILogger<WarehouseService> logger)
         {
             this.logger = logger;
-            Init();
+            InitWarehouse();
         }
 
-        private void Init()
+        private void InitWarehouse()
         {
             try
             {
@@ -39,6 +42,8 @@ namespace ConsoleApp.Service
                 retailerProducts = Helper.Deserialize<RetailerProduct>(path, new string[] {
                     "ProductId","RetailerName","RetailerProductCode","RetailerProductCodeType","DateReceived" })
                     .Where(o => o.ProductId != 0);
+
+                SearchProvider = new WarehouseSearchProvider(products, retailerProducts);
             }
             catch (Exception ex)
             {
@@ -58,40 +63,7 @@ namespace ConsoleApp.Service
 
         public Task<IEnumerable<OutputProduct>> GetOutputProducts()
         {
-            var map = new Dictionary<string, OutputProduct>();
-
-            foreach (var retail in retailerProducts)
-            {
-                // Get the master product
-                var master = products.Where(o => o.ProductId == retail.ProductId).SingleOrDefault();
-
-                var outputProduct = new OutputProduct()
-                {
-                    ProductId = retail.ProductId,
-                    ProductName = master.ProductName,
-                    CodeType = retail.RetailerProductCodeType,
-                    Code = retail.RetailerProductCode,
-                    DateReceived = retail.DateReceived
-                };
-
-                // Create a unique dictionary key: ProductId-CodeType
-                var key = $"{outputProduct.ProductId}-{outputProduct.CodeType}";
-
-                if (!map.ContainsKey(key))
-                {
-                    map.Add(key, outputProduct);
-                }
-                else
-                {
-                    // Ensure we keep the latest DateReceived
-                    if (map[key].DateReceived < retail.DateReceived)
-                    {
-                        map[key].DateReceived = retail.DateReceived;
-                        map[key].Code = retail.RetailerProductCode;
-                    }
-                }
-            }
-            return Task.FromResult(map.Values.AsEnumerable());
+            return Task.FromResult(SearchProvider.GetOutputProducts());
         }
     }
 }
