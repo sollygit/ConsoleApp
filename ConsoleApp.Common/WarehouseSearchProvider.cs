@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ConsoleApp.Services
+namespace ConsoleApp.Common
 {
     public class WarehouseSearchProvider
     {
