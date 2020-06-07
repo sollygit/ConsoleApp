@@ -4,16 +4,16 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ConsoleApp.Service
 {
     public interface IWarehouseService
     {
-        IEnumerable<Product> GetProducts();
-        IEnumerable<RetailerProduct> GetRetailerProducts();
-        IEnumerable<OutputProduct> GetOutputProducts();
+        Task<IEnumerable<Product>> GetProducts();
+        Task<IEnumerable<RetailerProduct>> GetRetailerProducts();
+        Task<IEnumerable<OutputProduct>> GetOutputProducts();
     }
 
     public class WarehouseService : IWarehouseService
@@ -25,36 +25,17 @@ namespace ConsoleApp.Service
         public WarehouseService(ILogger<WarehouseService> logger)
         {
             this.logger = logger;
-            products = GetProducts();
-            retailerProducts = GetRetailerProducts();
+            Init();
         }
 
-        public IEnumerable<Product> GetProducts()
+        private void Init()
         {
-            if (products != null) return products;
-
             try
             {
                 var path = ConfigurationManager.AppSettings["Products"];
-                var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
                 products = Helper.Deserialize<Product>(path, new string[] { "ProductId", "ProductName" });
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex.Message);
-            }
 
-            return products;
-        }
-
-        public IEnumerable<RetailerProduct> GetRetailerProducts()
-        {
-            if (retailerProducts != null) return retailerProducts;
-
-            try
-            {
-                var path = ConfigurationManager.AppSettings["RetailerProducts"];
-                var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
+                path = ConfigurationManager.AppSettings["RetailerProducts"];
                 retailerProducts = Helper.Deserialize<RetailerProduct>(path, new string[] {
                     "ProductId","RetailerName","RetailerProductCode","RetailerProductCodeType","DateReceived" })
                     .Where(o => o.ProductId != 0);
@@ -63,11 +44,19 @@ namespace ConsoleApp.Service
             {
                 logger.LogError(ex.Message);
             }
-
-            return retailerProducts;
         }
 
-        public IEnumerable<OutputProduct> GetOutputProducts()
+        public Task<IEnumerable<Product>> GetProducts()
+        {
+            return Task.FromResult(products);
+        }
+
+        public Task<IEnumerable<RetailerProduct>> GetRetailerProducts()
+        {
+            return Task.FromResult(retailerProducts);
+        }
+
+        public Task<IEnumerable<OutputProduct>> GetOutputProducts()
         {
             var map = new Dictionary<string, OutputProduct>();
 
@@ -102,7 +91,7 @@ namespace ConsoleApp.Service
                     }
                 }
             }
-            return map.Values.ToList();
+            return Task.FromResult(map.Values.AsEnumerable());
         }
     }
 }

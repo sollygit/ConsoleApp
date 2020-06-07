@@ -39,9 +39,9 @@ namespace ConsoleApp
                 .Add("Quadratic Calculation", new Action(Functions.FindRoots))
 
                 // Warehouse
-                .Add("Products", new Action(Warehouse.Products))
-                .Add("Retailer Products", new Action(Warehouse.RetailerProducts))
-                .Add("Output Products", new Action(Warehouse.OutputProducts));
+                .Add("Products", new Action(async () => await Warehouse.Products()))
+                .Add("Retailer Products", new Action(async () => await Warehouse.RetailerProducts()))
+                .Add("Output Products", new Action(async () => await Warehouse.OutputProducts()));
 
             while (!exit)
             {
