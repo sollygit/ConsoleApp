@@ -1,44 +1,80 @@
-﻿using ConsoleApp.Models;
-using ConsoleApp.Repository;
+﻿using ConsoleApp.Common;
+using ConsoleApp.Models;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 
 namespace ConsoleApp.Service
 {
     public interface IWarehouseService
     {
-        IEnumerable<Product> ProductsAll();
-        IEnumerable<RetailerProduct> RetailerProductsAll();
-        IEnumerable<OutputProduct> OutputProducts();
+        IEnumerable<Product> GetProducts();
+        IEnumerable<RetailerProduct> GetRetailerProducts();
+        IEnumerable<OutputProduct> GetOutputProducts();
     }
 
     public class WarehouseService : IWarehouseService
     {
-        readonly IWarehouseRepository _warehouseRepository;
-        
-        public WarehouseService(IWarehouseRepository warehouseRepository)
+        private readonly ILogger logger;
+        private IEnumerable<Product> products;
+        private IEnumerable<RetailerProduct> retailerProducts;
+
+        public WarehouseService(ILogger<WarehouseService> logger)
         {
-            _warehouseRepository = warehouseRepository;            
+            this.logger = logger;
+            products = GetProducts();
+            retailerProducts = GetRetailerProducts();
         }
 
-        public IEnumerable<Product> ProductsAll()
+        public IEnumerable<Product> GetProducts()
         {
-            return _warehouseRepository.Products;
+            if (products != null) return products;
+
+            try
+            {
+                var path = ConfigurationManager.AppSettings["Products"];
+                var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
+                products = Helper.Deserialize<Product>(path, new string[] { "ProductId", "ProductName" });
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
+            return products;
         }
 
-        public IEnumerable<RetailerProduct> RetailerProductsAll()
+        public IEnumerable<RetailerProduct> GetRetailerProducts()
         {
-            return _warehouseRepository.RetailerProducts;
+            if (retailerProducts != null) return retailerProducts;
+
+            try
+            {
+                var path = ConfigurationManager.AppSettings["RetailerProducts"];
+                var text = File.ReadAllText($"{Directory.GetCurrentDirectory()}\\{path}");
+                retailerProducts = Helper.Deserialize<RetailerProduct>(path, new string[] {
+                    "ProductId","RetailerName","RetailerProductCode","RetailerProductCodeType","DateReceived" })
+                    .Where(o => o.ProductId != 0);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
+            return retailerProducts;
         }
 
-        public IEnumerable<OutputProduct> OutputProducts()
+        public IEnumerable<OutputProduct> GetOutputProducts()
         {
             var map = new Dictionary<string, OutputProduct>();
 
-            foreach (var retail in _warehouseRepository.RetailerProducts)
+            foreach (var retail in retailerProducts)
             {
                 // Get the master product
-                var master = _warehouseRepository.Products.Where(o => o.ProductId == retail.ProductId).SingleOrDefault();
+                var master = products.Where(o => o.ProductId == retail.ProductId).SingleOrDefault();
 
                 var outputProduct = new OutputProduct()
                 {
