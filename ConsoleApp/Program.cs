@@ -54,7 +54,7 @@ namespace ConsoleApp
 
         static void Main()
         {
-            // Configure services
+            // Configure Services
             var services = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
                 .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
