@@ -32,7 +32,7 @@ namespace ConsoleApp
                 .Add("JSON to Model", new Action(Functions.JSON_To_Model))
                 .Add("CSV to Model", new Action(Functions.CSV_To_Model))
                 .Add("XML Folders", new Action(Functions.XmlFolders))
-                .Add("Youtube Data API", new Action(Functions.Youtube_SearchQuery))
+                .Add("YouTube Data API", new Action(Functions.Youtube_SearchQuery))
                 .Add("Facebook Public Profile", new Action(Functions.Facebook_Profile))
                 .Add("Facebook Search Query", new Action(Functions.Facebook_SearchQuery))
                 .Add("Async Enumerable Forcasts", new Action(Functions.Forcasts_AsyncEnumerable))
