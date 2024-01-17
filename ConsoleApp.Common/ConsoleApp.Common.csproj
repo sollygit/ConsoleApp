@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <UserSecretsId>41f54e5d-a20b-40ef-aabc-48473c9a9505</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ChoETL.JSON.NETStandard" Version="1.2.0.5" />
+    <PackageReference Include="ChoETL.NETStandard" Version="1.2.0.5" />
+    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConsoleApp.Models\ConsoleApp.Models.csproj" />
+  </ItemGroup>
+  
+</Project>

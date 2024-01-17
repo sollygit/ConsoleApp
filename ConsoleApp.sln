@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34202.233
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{8F98217D-1FF6-4884-90DF-DDD772D98252}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.UnitTest", "ConsoleApp.UnitTest\ConsoleApp.UnitTest.csproj", "{FF7B85A4-0687-4306-8B8A-709F467157F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Models", "ConsoleApp.Models\ConsoleApp.Models.csproj", "{BB059262-99B7-49DB-BC74-0A7631E7B718}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Common", "ConsoleApp.Common\ConsoleApp.Common.csproj", "{920B8C1C-5A89-49B7-AF34-350F14CF59E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Services", "ConsoleApp.Services\ConsoleApp.Services.csproj", "{CF5FF4A7-178E-45F2-BAEB-741697E5484F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Snippets", "SQL Snippets", "{74CC4CDD-C1B0-43EC-96C0-A7DC19ED519C}"
+	ProjectSection(SolutionItems) = preProject
+		SQL Snippets\email_trigger.sql = SQL Snippets\email_trigger.sql
+		SQL Snippets\northwind_snippets.sql = SQL Snippets\northwind_snippets.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F98217D-1FF6-4884-90DF-DDD772D98252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F98217D-1FF6-4884-90DF-DDD772D98252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F98217D-1FF6-4884-90DF-DDD772D98252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F98217D-1FF6-4884-90DF-DDD772D98252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF7B85A4-0687-4306-8B8A-709F467157F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7B85A4-0687-4306-8B8A-709F467157F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7B85A4-0687-4306-8B8A-709F467157F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7B85A4-0687-4306-8B8A-709F467157F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB059262-99B7-49DB-BC74-0A7631E7B718}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB059262-99B7-49DB-BC74-0A7631E7B718}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB059262-99B7-49DB-BC74-0A7631E7B718}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB059262-99B7-49DB-BC74-0A7631E7B718}.Release|Any CPU.Build.0 = Release|Any CPU
+		{920B8C1C-5A89-49B7-AF34-350F14CF59E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{920B8C1C-5A89-49B7-AF34-350F14CF59E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{920B8C1C-5A89-49B7-AF34-350F14CF59E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{920B8C1C-5A89-49B7-AF34-350F14CF59E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B7325F49-21A6-47B6-9A39-B62CC58C7D2F}
+	EndGlobalSection
+EndGlobal
