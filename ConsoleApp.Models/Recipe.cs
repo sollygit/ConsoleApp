@@ -10,8 +10,7 @@ namespace ConsoleApp.Models
         public string Id { get; set; }
         public string Name { get; set; }
         public string Source { get; set; }
-        public string SourceShort => Uri.TryCreate(Source, UriKind.Absolute, out var sourceUri) ? 
-            sourceUri.Authority : Source;
+        public string SourceShort => Uri.TryCreate(Source, UriKind.Absolute, out var sourceUri) ?  sourceUri.Authority : Source;
         public int PrepTime { get; set; }
         public int WaitTime { get; set; }
         public int CookTime { get; set; }
