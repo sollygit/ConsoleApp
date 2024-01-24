@@ -53,4 +53,4 @@ My Code Remarks:
 - CSV files located in a shared folder - App.config to configure location of CSV files.
 - Using Nuget packages like ChoETL to read/write CSV to JSON.
 - Should consider caching objects fetched for better perf. 
-- Added a few unit-test functions
+- Added a few unit-test functions.
