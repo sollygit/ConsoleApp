@@ -14,5 +14,5 @@
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp.Models\ConsoleApp.Models.csproj" />
   </ItemGroup>
-  
+
 </Project>

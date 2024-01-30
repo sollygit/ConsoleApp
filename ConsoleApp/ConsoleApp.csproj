@@ -50,4 +50,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="::sign.bat $(TargetDir)" />
+  </Target>
+
 </Project>
