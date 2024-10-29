@@ -1,6 +1,4 @@
-﻿using ConsoleApp.Actions;
-using ConsoleApp.Models;
-using ConsoleApp.Service;
+﻿using ConsoleApp.Models;
 using EasyConsoleCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -53,7 +51,7 @@ namespace ConsoleApp
                 .Add("Revese Words", new Action(Functions.Reverse_Words))
                 .Add("Linked List", new Action(Functions.Linked_List))
                 .Add("Is Palindrome", new Action(Functions.IsPalindromeTest))
-                .Add("On Property Change", new Action(Functions.ProductPropertyChanged))
+                .Add("On Property Change", new Action(Functions.WeatherForecastPropertyChanged))
                 .Add("Fibonatchi", new Action(Functions.Fibonacci))
                 .Add("Integer to Roman", new Action(Functions.IntegerToRoman))
                 .Add("Longest Word", new Action(Functions.LongestWord))
@@ -66,12 +64,7 @@ namespace ConsoleApp
                 .Add("YouTube Data API", new Action(Functions.Youtube_SearchQuery))
                 .Add("Facebook Profile", new Action(Functions.Facebook_Profile))
                 .Add("Quadratic Calculation", new Action(Functions.FindRoots))
-                .Add("Weather Forcasts Async", new Action(async () => await Functions.WeatherForcasts_Async()))
-
-                // Warehouse
-                .Add("Products", new Action(async () => await Warehouse.Products()))
-                .Add("Retailer Products", new Action(async () => await Warehouse.RetailerProducts()))
-                .Add("Output Products", new Action(async () => await Warehouse.OutputProducts()));
+                .Add("Weather Forcasts Async", new Action(async () => await Functions.WeatherForcasts_Async()));
 
             while (!exit)
             {
@@ -94,8 +87,7 @@ namespace ConsoleApp
             var services = new ServiceCollection()
                 .AddLogging(configure => configure.AddConsole())
                 .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
-                .AddSingleton(Configuration)
-                .AddSingleton<IWarehouseService, WarehouseService>();
+                .AddSingleton(Configuration);
 
             ServiceProvider = services.BuildServiceProvider();
             Run();

@@ -1,17 +1,15 @@
 ﻿using ConsoleApp.Common;
 using ConsoleApp.Models;
 using ConsoleApp.Services;
-using EasyConsoleCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Diagnostics.Metrics;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConsoleApp.Actions
+namespace ConsoleApp
 {
     static class Functions
     {
@@ -19,7 +17,7 @@ namespace ConsoleApp.Actions
         {
             string words;
             Console.Write("Please enter a string of words:");
-            while (String.IsNullOrEmpty(words = Console.ReadLine().Trim()))
+            while (string.IsNullOrEmpty(words = Console.ReadLine().Trim()))
             {
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
             }
@@ -39,22 +37,12 @@ namespace ConsoleApp.Actions
             Utility.IsPalindrome(Console.ReadLine());
         }
 
-        public static void ProductPropertyChanged()
+        public static void WeatherForecastPropertyChanged()
         {
-            var Product = new Product();
-            Product.PropertyChange += new Product.PropertyChangeHandler(PropertyHasChanged);
-            Product.ProductName = "Jack Daniels";
-            Product.ProductName = "Black Label";
-        }
-
-        public static void PropertyHasChanged(object sender, PropertyChangeEventArgs data)
-        {
-            if (string.IsNullOrEmpty(data.OldValue)) return;
-
-            if (data.PropertyName == "ProductName")
-            {
-                Console.WriteLine($"New value: '{data.NewValue}' Old value: '{data.OldValue}'");
-            }
+            var weatherForecast = new WeatherForecast();
+            weatherForecast.PropertyChange += new WeatherForecast.PropertyChangeHandler(PropertyHasChanged);
+            weatherForecast.Summary = Constants.SUMMARIES[0];
+            weatherForecast.Summary = Constants.SUMMARIES[1];
         }
 
         public static void Fibonacci()
@@ -84,7 +72,7 @@ namespace ConsoleApp.Actions
         {
             string words;
             Console.Write("Please enter a string of words:");
-            while (String.IsNullOrEmpty(words = Console.ReadLine().Trim()))
+            while (string.IsNullOrEmpty(words = Console.ReadLine().Trim()))
             {
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
             }
@@ -235,6 +223,16 @@ namespace ConsoleApp.Actions
             using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(10));
             Console.CancelKeyPress += (s, e) => { cts.Cancel(); };
             await Utility.GetWeatherForecastAsync(cts.Token, Convert.ToInt32(length));
+        }
+
+        static void PropertyHasChanged(object sender, PropertyChangeEventArgs data)
+        {
+            if (string.IsNullOrEmpty(data.OldValue)) return;
+
+            if (data.PropertyName == Constants.Summary)
+            {
+                Console.WriteLine($"New value: '{data.NewValue}' Old value: '{data.OldValue}'");
+            }
         }
     }
 }
