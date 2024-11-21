@@ -90,6 +90,7 @@ namespace ConsoleApp
                 .AddSingleton(Configuration);
 
             ServiceProvider = services.BuildServiceProvider();
+            
             Run();
         }
     }
