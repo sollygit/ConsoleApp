@@ -3,11 +3,6 @@ using ConsoleApp.Models;
 using ConsoleApp.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace ConsoleApp
 {
@@ -17,7 +12,7 @@ namespace ConsoleApp
         {
             string words;
             Console.Write("Please enter a string of words:");
-            while (string.IsNullOrEmpty(words = Console.ReadLine().Trim()))
+            while (string.IsNullOrEmpty(words = Console.ReadLine()!.Trim()))
             {
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
             }
@@ -34,7 +29,7 @@ namespace ConsoleApp
         public static void IsPalindromeTest()
         {
             Console.Write("Please enter your word:");
-            Utility.IsPalindrome(Console.ReadLine());
+            Utility.IsPalindrome(Console.ReadLine()!);
         }
 
         public static void WeatherForecastPropertyChanged()
@@ -49,7 +44,7 @@ namespace ConsoleApp
         {
             // Example: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 
             Console.Write("Please enter a position in a Fibonacci series:");
-            var position = Convert.ToInt32(Console.ReadLine());
+            var position = Convert.ToInt32(Console.ReadLine()!);
             var result = Utility.Fibonacci(position - 1);
             Console.WriteLine($"The result of position {position} is {result}");
         }
@@ -59,7 +54,7 @@ namespace ConsoleApp
             string input;
             int number;
             Console.WriteLine("Please enter your integer number:");
-            while (!(!string.IsNullOrEmpty(input = Console.ReadLine().Trim()) &&
+            while (!(!string.IsNullOrEmpty(input = Console.ReadLine()!.Trim()) &&
                 int.TryParse(input, out number) && number > 0 && number <= 100000))
             {
                 Console.WriteLine("Please enter a number between 1 to 100,000:");
@@ -72,7 +67,7 @@ namespace ConsoleApp
         {
             string words;
             Console.Write("Please enter a string of words:");
-            while (string.IsNullOrEmpty(words = Console.ReadLine().Trim()))
+            while (string.IsNullOrEmpty(words = Console.ReadLine()!.Trim()))
             {
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
             }
@@ -98,7 +93,7 @@ namespace ConsoleApp
                 string counter;
                 int intCounter;
                 Console.Write("Please enter a FizzBuzz counter:");
-                while (!(!string.IsNullOrEmpty(counter = Console.ReadLine().Trim()) &&
+                while (!(!string.IsNullOrEmpty(counter = Console.ReadLine()!.Trim()) &&
                 int.TryParse(counter, out intCounter) && intCounter > 0 && intCounter <= 1000))
                 {
                     Console.WriteLine("Please enter a number between 1 to 1000:");
@@ -112,38 +107,35 @@ namespace ConsoleApp
             }
         }
 
-        public static void JSON_To_Model()
+        public static void JSON_To_Model(string techs, string recipes)
         {
-            var techs = Program.Configuration["Technologies"];
             var json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}\{techs}");
-            var technologies = Deserializer.FromJson<Technology>(json)
+            var technologiesJson = Deserializer.FromJson<Technology>(json)
                 .OrderBy(o => o.TechnologyId);
 
             Console.WriteLine($"{Environment.NewLine}Technologies:");
 
-            foreach (var t in technologies)
+            foreach (var t in technologiesJson)
             {
                 Console.WriteLine(t.ToString());
             }
 
-            var recipeFile = Program.Configuration["Recipes"];
-            json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}\{recipeFile}");
-            var recipes = Deserializer.FromJsonDictionary<Recipe>(json)
+            json = File.ReadAllText(@$"{Directory.GetCurrentDirectory()}\{recipes}");
+            var recipesJson = Deserializer.FromJsonDictionary<Recipe>(json)
                 .OrderBy(o => o.Key);
 
             Console.WriteLine($"{Environment.NewLine}Recipes:")
 ;
-            foreach (var r in recipes)
+            foreach (var r in recipesJson)
             {
                 Console.WriteLine($"{r.Key},{r.Value.Name},{r.Value.SourceShort}");
             }
         }
 
-        public static void CSV_To_Model()
+        public static void CSV_To_Model(string todoItems)
         {
             try
             {
-                var todoItems = Program.Configuration["TodoItems"];
                 var path = @$"{Directory.GetCurrentDirectory()}\{todoItems}";
                 var todos = Deserializer.FromCsv<TodoItem>(path, new string[] { "IsComplete", "Name", "OwnerId" });
 
@@ -159,26 +151,24 @@ namespace ConsoleApp
             }
         }
 
-        public static void Youtube_SearchQuery()
+        public static void Youtube_SearchQuery(string youtubeApiKey)
         {
             Console.WriteLine("Please enter your Youtube search query:");
 
             string query;
 
-            while (string.IsNullOrEmpty(query = Console.ReadLine().Trim()))
+            while (string.IsNullOrEmpty(query = Console.ReadLine()!.Trim()))
             {
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
             }
 
             // https://console.cloud.google.com/apis/api/youtube.googleapis.com/credentials?cloudshell=false&project=jovial-monument-321404
-            var key = Program.Configuration["YoutubeApiKey"];
-            GoogleService.YouTubeSearch(key, query, 10).Wait();
+            GoogleService.YouTubeSearch(youtubeApiKey, query, 10).Wait();
         }
 
-        public static void Facebook_Profile()
+        public static void Facebook_Profile(string url, string accessToken)
         {
-            var accessToken = Program.Configuration["FacebookAccessToken"];
-            var facebookClient = new FacebookClient(Program.Configuration["FacebookApiUri"]);
+            var facebookClient = new FacebookClient(url);
             var facebookService = new FacebookService(facebookClient);
 
             try
@@ -200,9 +190,8 @@ namespace ConsoleApp
             Console.WriteLine($"{result.Item1}, {result.Item2}");
         }
 
-        public static void XmlFolders()
+        public static void XmlFolders(string xmlFile)
         {
-            var xmlFile = Program.Configuration["XmlFile"];
             using var reader = new StreamReader(@$"{Directory.GetCurrentDirectory()}\{xmlFile}");
             var xml = reader.ReadToEnd();
             var names = UtilityXml.GetFolders(xml, 'u');
@@ -214,7 +203,7 @@ namespace ConsoleApp
             string input;
             int length;
             Console.WriteLine("Total number of forcasts:");
-            while (!(!string.IsNullOrEmpty(input = Console.ReadLine().Trim()) &&
+            while (!(!string.IsNullOrEmpty(input = Console.ReadLine()!.Trim()) &&
                 int.TryParse(input, out length) && length > 0 && length <= 10))
             {
                 Console.WriteLine("Please enter a number between 1 to 10:");

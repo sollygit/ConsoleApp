@@ -18,11 +18,11 @@ namespace ConsoleApp.Models
     public enum TechnologyType
     {
         Unknown = 0x00,
-        Upstream = 0x01,
-        Downstream = 0x02,
-        Standard = Upstream | Downstream,
-        Transit = 0x04,
-        Cage = 0x08,
-        Mailbag = 0x10
+        Frontend = 0x01,
+        Cloud = 0x02,
+        Hybrid = 0x04,
+        Dotnet = 0x08,
+        Javascript = 0x10,
+        NodeJS = Frontend | Cloud // bitwise OR
     }
 }

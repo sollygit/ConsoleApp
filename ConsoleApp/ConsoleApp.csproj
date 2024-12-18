@@ -3,8 +3,21 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <UserSecretsId>d9715443-7b91-4a57-8274-61ce1ea0c602</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>appsettings.json</DependentUpon>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="EasyConsoleCore" Version="1.0.2" />

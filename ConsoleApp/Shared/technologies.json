@@ -5,12 +5,12 @@
     "technologyType": 1
   },
   {
-    "technologyId": 6,
+    "technologyId": 2,
     "technologyName": "Azure",
     "technologyType": 2
   },
   {
-    "technologyId": 5,
+    "technologyId": 3,
     "technologyName": "Blazor",
     "technologyType": 4
   },
@@ -20,13 +20,13 @@
     "technologyType": 8
   },
   {
-    "technologyId": 3,
-    "technologyName": "MVC",
+    "technologyId": 5,
+    "technologyName": "Typescript",
     "technologyType": 16
   },
   {
-    "technologyId": 2,
-    "technologyName": "SQL",
-    "technologyType": 19
+    "technologyId": 6,
+    "technologyName": "React",
+    "technologyType": 3
   }
 ]
