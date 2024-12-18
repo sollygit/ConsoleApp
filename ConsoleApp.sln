@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Snippets", "SQL Snippet
 		SQL Snippets\northwind_snippets.sql = SQL Snippets\northwind_snippets.sql
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApx", "ConsoleApx\ConsoleApx.csproj", "{269DBFD2-77FD-44A5-92C6-034D21077E91}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,10 +45,6 @@ Global
 		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF5FF4A7-178E-45F2-BAEB-741697E5484F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{269DBFD2-77FD-44A5-92C6-034D21077E91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{269DBFD2-77FD-44A5-92C6-034D21077E91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{269DBFD2-77FD-44A5-92C6-034D21077E91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{269DBFD2-77FD-44A5-92C6-034D21077E91}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
