@@ -8,7 +8,7 @@
   <ItemGroup>
     <PackageReference Include="ChoETL.JSON.NETStandard" Version="1.2.0.5" />
     <PackageReference Include="ChoETL.NETStandard" Version="1.2.0.5" />
-    <PackageReference Include="System.Text.Json" Version="4.7.2" />
+    <PackageReference Include="System.Text.Json" Version="8.0.5" />
   </ItemGroup>
 
   <ItemGroup>

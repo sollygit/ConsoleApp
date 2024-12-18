@@ -16,7 +16,6 @@ namespace ConsoleApp
         static Menu menu;
 
         public static IConfiguration Configuration { get; private set; }
-        public static ServiceProvider ServiceProvider { get; private set; }
 
         static IConfigurationBuilder Configure(IConfigurationBuilder config, string environmentName)
         {
@@ -69,14 +68,13 @@ namespace ConsoleApp
             while (!exit)
             {
                 menu.Display();
+
                 if (!exit)
                 {
                     Console.WriteLine("Hit Enter to continue...");
                     Console.ReadLine();
                 }
             }
-
-            Lovely.Test();
         }
 
         static void Main(string[] _args)
@@ -89,7 +87,7 @@ namespace ConsoleApp
                 .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
                 .AddSingleton(Configuration);
 
-            ServiceProvider = services.BuildServiceProvider();
+            services.BuildServiceProvider();
             
             Run();
         }
