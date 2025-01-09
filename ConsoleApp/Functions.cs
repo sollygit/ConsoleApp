@@ -162,7 +162,7 @@ namespace ConsoleApp
                 Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
             }
 
-            // https://console.cloud.google.com/apis/api/youtube.googleapis.com/credentials?cloudshell=false&project=jovial-monument-321404
+            // Credentials key: https://console.cloud.google.com/apis/credentials?project=test-project-1976
             GoogleService.YouTubeSearch(youtubeApiKey, query, 10).Wait();
         }
 
@@ -173,6 +173,7 @@ namespace ConsoleApp
 
             try
             {
+                // Get access token from https://developers.facebook.com/tools/explorer
                 var account = facebookService.GetProfile(accessToken).GetAwaiter().GetResult();
                 Console.WriteLine(JToken.Parse(account).ToString(Formatting.Indented));
             }

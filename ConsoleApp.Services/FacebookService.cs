@@ -19,7 +19,7 @@ namespace ConsoleApp.Services
 
         public async Task<string> GetProfile(string accessToken)
         {
-            return await _facebookClient.Get(accessToken, "me", "id,name,email,gender,birthday,picture");
+            return await _facebookClient.Get(accessToken, "me", "id,name,picture");
         }
     }
 }

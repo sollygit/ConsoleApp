@@ -6,9 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ChoETL.JSON.NETStandard" Version="1.2.0.5" />
-    <PackageReference Include="ChoETL.NETStandard" Version="1.2.0.5" />
-    <PackageReference Include="System.Text.Json" Version="8.0.5" />
+    <PackageReference Include="ChoETL.JSON.NETStandard" Version="1.2.1.67" />
+    <PackageReference Include="ChoETL.NETStandard" Version="1.2.1.69" />
+    <PackageReference Include="System.Text.Json" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
