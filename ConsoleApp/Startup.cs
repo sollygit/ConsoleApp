@@ -13,32 +13,26 @@ namespace ConsoleApp
 
         public Startup()
         {
-            Configuration = CreateConfiguration();
-            
-            new ServiceCollection()
-                .AddLogging(configure => configure.AddConsole())
-                .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
-                .AddSingleton(Configuration)
-                .BuildServiceProvider();
-        }
-
-        IConfiguration CreateConfiguration()
-        {
-            var env = new HostingEnvironment
-            {
+            var env = new HostingEnvironment {
                 EnvironmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production",
                 ApplicationName = AppDomain.CurrentDomain.FriendlyName,
                 ContentRootPath = AppDomain.CurrentDomain.BaseDirectory,
                 ContentRootFileProvider = new PhysicalFileProvider(AppDomain.CurrentDomain.BaseDirectory)
             };
 
-            return new ConfigurationBuilder()
+            Configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddUserSecrets<Program>()
                 .AddEnvironmentVariables()
                 .Build();
+
+            new ServiceCollection()
+                .AddLogging(configure => configure.AddConsole())
+                .Configure<LoggerFilterOptions>(options => options.MinLevel = LogLevel.Debug)
+                .AddSingleton(Configuration)
+                .BuildServiceProvider();
         }
 
         public void Run()
@@ -59,7 +53,7 @@ namespace ConsoleApp
                 .Add("On Property Change", new Action(Functions.WeatherForecastPropertyChanged))
                 .Add("Fibonatchi", new Action(Functions.Fibonacci))
                 .Add("Integer to Roman", new Action(Functions.IntegerToRoman))
-                .Add("Longest Word", new Action(Functions.LongestWord))
+                .Add("CSV to Model", new Action(() => Functions.LongestWord(TodoItems)))
                 .Add("Custom Sort", new Action(Functions.CustomSort))
                 .Add("Seven Boom (Press ESC to stop)", new Action(Functions.RunSevenBoom))
                 .Add("Fizz Buzz", new Action(Functions.FizzBuzz))

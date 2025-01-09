@@ -3,6 +3,7 @@ using ConsoleApp.Models;
 using ConsoleApp.Services;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace ConsoleApp
 {
@@ -63,22 +64,19 @@ namespace ConsoleApp
             Utility.IntegerToRoman(number);
         }
 
-        public static void LongestWord()
+        public static void LongestWord(string todoItems)
         {
-            string words;
-            Console.Write("Please enter a string of words:");
-            while (string.IsNullOrEmpty(words = Console.ReadLine()!.Trim()))
-            {
-                Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
-            }
-
+            var path = @$"{Directory.GetCurrentDirectory()}\{todoItems}";
+            var todos = Deserializer.FromCsv<TodoItem>(path, ["IsComplete", "Name", "OwnerId"]);
+            var words = string.Join(' ', todos.Select(s => s.Name));
             var count = Utility.GetLongestWord(words);
+            
             Console.WriteLine($"The longest word in {words} has {count} chars");
         }
 
         public static void CustomSort()
         {
-            Utility.CustomSort(new int[] { 8, 2, 2, 7, 5, 1, 8, 5, 3, 5 });
+            Utility.CustomSort([8, 2, 2, 7, 5, 1, 8, 5, 3, 5]);
         }
 
         public static void RunSevenBoom()
@@ -137,7 +135,7 @@ namespace ConsoleApp
             try
             {
                 var path = @$"{Directory.GetCurrentDirectory()}\{todoItems}";
-                var todos = Deserializer.FromCsv<TodoItem>(path, new string[] { "IsComplete", "Name", "OwnerId" });
+                var todos = Deserializer.FromCsv<TodoItem>(path, ["IsComplete", "Name", "OwnerId"]);
 
                 foreach (var item in todos)
                 {
@@ -195,8 +193,12 @@ namespace ConsoleApp
         {
             using var reader = new StreamReader(@$"{Directory.GetCurrentDirectory()}\{xmlFile}");
             var xml = reader.ReadToEnd();
-            var names = UtilityXml.GetFolders(xml, 'u');
-            Console.WriteLine(string.Join(',', names));
+            var doc = XDocument.Parse(xml);
+            var folders = doc.Descendants("folder");
+            var names = from f in folders
+                        select f.Attribute("name")!.Value;
+
+            Console.WriteLine(string.Join(Environment.NewLine, names));
         }
 
         public static async Task WeatherForcasts_Async()

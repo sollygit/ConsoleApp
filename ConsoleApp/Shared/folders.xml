@@ -1,7 +1,26 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<folder name="c">
-  <folder name="program files">
-    <folder name="uninstall information" />
+
+<folder name="C">
+  <folder name="Program Files">
+    <folder name="Common Files" />
+    <folder name="Internet Explorer" />
+    <folder name="Uninstall information" />
+    <folder name="Windows Defender" />
+    <folder name="Windows Mail" />
+    <folder name="Windows Media Player" />
+    <folder name="Windows NT" />
+    <folder name="Windows Photo Viewer" />
+    <folder name="Windows Portable Devices" />
+    <folder name="Windows Sidebar" />
   </folder>
-  <folder name="users" />
+  <folder name="Users">
+    <folder name="Default" />
+    <folder name="Public" />
+  </folder>
+  <folder name="Windows">
+    <folder name="System32" />
+    <folder name="SysWOW64" />
+    <folder name="Temp" />
+    <folder name="WinSxS" />
+  </folder>
 </folder>
