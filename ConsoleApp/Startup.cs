@@ -53,7 +53,7 @@ namespace ConsoleApp
                 .Add("On Property Change", new Action(Functions.WeatherForecastPropertyChanged))
                 .Add("Fibonatchi", new Action(Functions.Fibonacci))
                 .Add("Integer to Roman", new Action(Functions.IntegerToRoman))
-                .Add("CSV to Model", new Action(() => Functions.LongestWord(TodoItems)))
+                .Add("Longest Word", new Action(() => Functions.LongestWord(TodoItems)))
                 .Add("Custom Sort", new Action(Functions.CustomSort))
                 .Add("Seven Boom (Press ESC to stop)", new Action(Functions.RunSevenBoom))
                 .Add("Fizz Buzz", new Action(Functions.FizzBuzz))

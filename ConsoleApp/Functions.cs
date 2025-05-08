@@ -71,7 +71,7 @@ namespace ConsoleApp
             var words = string.Join(' ', todos.Select(s => s.Name));
             var count = Utility.GetLongestWord(words);
             
-            Console.WriteLine($"The longest word in {words} has {count} chars");
+            Console.WriteLine($"The longest word in:\r\n'{words}'\r\nhas {count} chars");
         }
 
         public static void CustomSort()
