@@ -5,6 +5,8 @@ namespace ConsoleApp.Common
 {
     public static class LinkedList
     {
+        public static Node newHead;
+
         public static void Append(ref Node head, int data)
         {
             if (head != null)
@@ -70,8 +72,6 @@ namespace ConsoleApp.Common
             current.Next = prev;
             head = current;
         }
-
-        public static Node newHead;
 
         public static void ReverseUsingRecursion(Node head)
         {
