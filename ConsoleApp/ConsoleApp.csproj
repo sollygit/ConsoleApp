@@ -50,7 +50,7 @@
     <None Update="Shared\technologies.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Shared\todos.csv">
+    <None Update="Shared\movies.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

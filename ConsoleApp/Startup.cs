@@ -41,7 +41,7 @@ namespace ConsoleApp
             var Technologies = Configuration["Technologies"]!;
             var Recipes = Configuration["Recipes"]!;
             var XmlFile = Configuration["XmlFile"]!;
-            var TodoItems = Configuration["TodoItems"]!;
+            var Movies = Configuration["Movies"]!;
             var FacebookApiUri = Configuration["FacebookApiUri"]!;
             var FacebookAccessToken = Configuration["FacebookAccessToken"]!;
             var YoutubeApiKey = Configuration["YoutubeApiKey"]!;
@@ -53,12 +53,11 @@ namespace ConsoleApp
                 .Add("On Property Change", new Action(Functions.WeatherForecastPropertyChanged))
                 .Add("Fibonatchi", new Action(Functions.Fibonacci))
                 .Add("Integer to Roman", new Action(Functions.IntegerToRoman))
-                .Add("Longest Word", new Action(() => Functions.LongestWord(TodoItems)))
                 .Add("Custom Sort", new Action(Functions.CustomSort))
                 .Add("Seven Boom (Press ESC to stop)", new Action(Functions.RunSevenBoom))
                 .Add("Fizz Buzz", new Action(Functions.FizzBuzz))
                 .Add("JSON to Model", new Action(() => Functions.JSON_To_Model(Technologies, Recipes)))
-                .Add("CSV to Model", new Action(() => Functions.CSV_To_Model(TodoItems)))
+                .Add("CSV to Model", new Action(() => Functions.CSV_To_Model(Movies)))
                 .Add("XML Folders", new Action(() => Functions.XmlFolders(XmlFile)))
                 .Add("YouTube Data API", new Action(() => Functions.Youtube_SearchQuery(YoutubeApiKey)))
                 .Add("Facebook Profile", new Action(() => Functions.Facebook_Profile(FacebookApiUri, FacebookAccessToken)))

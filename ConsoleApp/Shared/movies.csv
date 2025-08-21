@@ -1,0 +1,12 @@
+MovieId,Title,Year,Type,Poster,Price,IsActive
+CW0076759,Star Wars: Episode IV - A New Hope,1977,Movie,https://picsum.photos/640/480/?image=369,123.50,True
+2INZPYK7H,Star Wars: Episode V – The Empire Strikes Back (1980),2008,Movie,https://picsum.photos/640/480/?image=14,739.94,True
+4GLJ4H6HE,Star Wars: Episode VI – Return of the Jedi (1983),2006,Movie,https://picsum.photos/640/480/?image=469,403.27,True
+5Q9AOGKJV,Star Wars: Episode I – The Phantom Menace (1999),2012,Movie,https://picsum.photos/640/480/?image=670,510.67,True
+EEIBJVZYA,Star Wars: Episode II – Attack of the Clones (2002),2011,Movie,https://picsum.photos/640/480/?image=61,989.21,True
+IFYI3175Z,Rogue One: A Star Wars Story (2016),2006,Movie,https://picsum.photos/640/480/?image=826,624.45,True
+NBLOVUXN6,Star Wars: Episode III – Revenge of the Sith (2005),2022,Movie,https://picsum.photos/640/480/?image=1076,471.31,True
+QTCS2DMWB,Solo: A Star Wars Story (2018),2012,Movie,https://picsum.photos/640/480/?image=499,783.54,True
+RRLQEIN8L,Star Wars: Episode VII – The Force Awakens (2015),2022,Movie,https://picsum.photos/640/480/?image=317,696.17,True
+VMUBXKQ9X,Star Wars: Episode VIII – The Last Jedi (2017),2025,Movie,https://picsum.photos/640/480/?image=927,745.38,True
+VSDWHPO4F,Star Wars: Episode IX – The Rise of Skywalker (2019),2024,Movie,https://picsum.photos/640/480/?image=373,793.96,True

@@ -64,16 +64,6 @@ namespace ConsoleApp
             Utility.IntegerToRoman(number);
         }
 
-        public static void LongestWord(string todoItems)
-        {
-            var path = @$"{Directory.GetCurrentDirectory()}\{todoItems}";
-            var todos = Deserializer.FromCsv<TodoItem>(path, ["IsComplete", "Name", "OwnerId"]);
-            var words = string.Join(' ', todos.Select(s => s.Name));
-            var count = Utility.GetLongestWord(words);
-            
-            Console.WriteLine($"The longest word in:\r\n'{words}'\r\nhas {count} chars");
-        }
-
         public static void CustomSort()
         {
             Utility.CustomSort([8, 2, 2, 7, 5, 1, 8, 5, 3, 5]);
@@ -130,16 +120,16 @@ namespace ConsoleApp
             }
         }
 
-        public static void CSV_To_Model(string todoItems)
+        public static void CSV_To_Model(string movies)
         {
             try
             {
-                var path = @$"{Directory.GetCurrentDirectory()}\{todoItems}";
-                var todos = Deserializer.FromCsv<TodoItem>(path, ["IsComplete", "Name", "OwnerId"]);
+                var path = @$"{Directory.GetCurrentDirectory()}\{movies}";
+                var items = Deserializer.FromCsv<Movie>(path, ["MovieId", "Title", "Year", "Type", "Poster", "Price", "IsActive"]);
 
-                foreach (var item in todos)
+                foreach (var item in items)
                 {
-                    Console.WriteLine($"{item.IsComplete},{item.Name},{item.OwnerId}");
+                    Console.WriteLine(item);
                 }
             }
 
