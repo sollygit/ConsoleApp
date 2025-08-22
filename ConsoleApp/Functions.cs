@@ -126,11 +126,7 @@ namespace ConsoleApp
             {
                 var path = @$"{Directory.GetCurrentDirectory()}\{movies}";
                 var items = Deserializer.FromCsv<Movie>(path, ["MovieId", "Title", "Year", "Type", "Poster", "Price", "IsActive"]);
-
-                foreach (var item in items)
-                {
-                    Console.WriteLine(item);
-                }
+                Console.WriteLine(JToken.Parse(items.ToJson()).ToString(Formatting.Indented));
             }
 
             catch (Exception ex)

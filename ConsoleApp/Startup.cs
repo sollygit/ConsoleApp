@@ -57,7 +57,7 @@ namespace ConsoleApp
                 .Add("Seven Boom (Press ESC to stop)", new Action(Functions.RunSevenBoom))
                 .Add("Fizz Buzz", new Action(Functions.FizzBuzz))
                 .Add("JSON to Model", new Action(() => Functions.JSON_To_Model(Technologies, Recipes)))
-                .Add("CSV to Model", new Action(() => Functions.CSV_To_Model(Movies)))
+                .Add("CSV to JSON", new Action(() => Functions.CSV_To_Model(Movies)))
                 .Add("XML Folders", new Action(() => Functions.XmlFolders(XmlFile)))
                 .Add("YouTube Data API", new Action(() => Functions.Youtube_SearchQuery(YoutubeApiKey)))
                 .Add("Facebook Profile", new Action(() => Functions.Facebook_Profile(FacebookApiUri, FacebookAccessToken)))
