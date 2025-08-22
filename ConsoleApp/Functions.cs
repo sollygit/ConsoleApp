@@ -125,7 +125,7 @@ namespace ConsoleApp
             try
             {
                 var path = @$"{Directory.GetCurrentDirectory()}\{movies}";
-                var items = Deserializer.FromCsv<Movie>(path, ["MovieId", "Title", "Year", "Type", "Poster", "Price", "IsActive"]);
+                var items = Deserializer.FromCsv<Movie>(path, ["MovieId", "Title", "Year", "Poster", "Price", "IsActive"]);
                 Console.WriteLine(JToken.Parse(items.ToJson()).ToString(Formatting.Indented));
             }
 
