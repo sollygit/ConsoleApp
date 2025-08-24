@@ -10,6 +10,18 @@ namespace ConsoleApp.Common
 {
     public static class Utility
     {
+        public static string Encode(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(text));
+        }
+
+        public static string Decode(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return string.Empty;
+            return Encoding.UTF8.GetString(Convert.FromBase64String(text));
+        }
+
         public static string Spaceless(string word)
         {
             if (String.IsNullOrEmpty(word)) return string.Empty;

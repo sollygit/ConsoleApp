@@ -9,6 +9,21 @@ namespace ConsoleApp
 {
     static class Functions
     {
+        public static void Encoding()
+        {
+            string text;
+            Console.Write("Please enter some text:");
+            while (string.IsNullOrEmpty(text = Console.ReadLine()!.Trim()))
+            {
+                Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
+            }
+
+            var encoded = Utility.Encode(text);
+            var decoded = Utility.Decode(encoded);
+
+            Console.WriteLine($"The encoded value of \"{text}\" is \"{encoded}\"\r\nThe original text is \"{decoded}\"");
+        }
+
         public static void Reverse_Words()
         {
             string words;

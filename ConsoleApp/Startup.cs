@@ -47,6 +47,7 @@ namespace ConsoleApp
             var YoutubeApiKey = Configuration["YoutubeApiKey"]!;
             var menu = new Menu()
                 .Add("Exit", () => { exit = true; })
+                .Add("Encoding", new Action(Functions.Encoding))
                 .Add("Revese Words", new Action(Functions.Reverse_Words))
                 .Add("Linked List", new Action(Functions.Linked_List))
                 .Add("Is Palindrome", new Action(Functions.IsPalindromeTest))
