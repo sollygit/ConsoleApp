@@ -24,19 +24,6 @@ namespace ConsoleApp
             Console.WriteLine($"The encoded value of \"{text}\" is \"{encoded}\"\r\nThe original text is \"{decoded}\"");
         }
 
-        public static void Reverse_Words()
-        {
-            string words;
-            Console.Write("Please enter a string of words:");
-            while (string.IsNullOrEmpty(words = Console.ReadLine()!.Trim()))
-            {
-                Console.WriteLine("Your input cannot be empty or whitespace, please try again:");
-            }
-
-            var reversed = Utility.ReverseWords(words);
-            Console.WriteLine($"The reverse of \"{words}\" is \"{reversed}\"");
-        }
-
         public static void Linked_List()
         {
             LinkedList.Test();
@@ -77,11 +64,6 @@ namespace ConsoleApp
             }
 
             Utility.IntegerToRoman(number);
-        }
-
-        public static void CustomSort()
-        {
-            Utility.CustomSort([8, 2, 2, 7, 5, 1, 8, 5, 3, 5]);
         }
 
         public static void RunSevenBoom()
