@@ -110,20 +110,20 @@ namespace ConsoleApp.Common
 
         }
 
-        public static void FizzBuzz(int count)
+        public static void FizzBuzz(int n)
         {
             bool isFizz;
             bool isBuzz;
-            Enumerable.Range(1, count).Select(number => {
+            Enumerable.Range(1, n).Select(number => {
                 isFizz = number % 3 == 0;
                 isBuzz = number % 5 == 0;
                 if (isFizz && isBuzz)
                 {
-                    Console.WriteLine("Fizbuzz");
+                    Console.WriteLine("FizzBuzz");
                 }
                 else if (isFizz)
                 {
-                    Console.WriteLine("Fiz");
+                    Console.WriteLine("Fizz");
                 }
                 else if (isBuzz)
                 {
