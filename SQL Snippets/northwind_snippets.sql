@@ -64,15 +64,16 @@ FROM
 GO
 
 /* Write a query that selects CustomerID, number of orders and average Freight weight for each customer who has more than 3 orders. */
-SELECT
-	CustomerID,
-	COUNT(*) as [Number of Orders],
-	AVG(Freight) as [Average Freight]
-FROM Orders 
-WHERE 
-	CustomerID in (select CustomerID from Orders group by CustomerID having count(*) > 3)
+SELECT 
+    CustomerID, 
+    COUNT(OrderID) AS NumberOfOrders,
+    AVG(Freight) AS AverageFreight
+FROM 
+    Orders
 GROUP BY 
-	CustomerID;
+    CustomerID
+HAVING 
+    COUNT(OrderID) > 3;
 GO
 
 /* Write a query that select all distinct cities from Customers and Suppliers. */
