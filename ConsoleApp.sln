@@ -13,6 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp.Services", "Cons
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL Snippets", "SQL Snippets", "{74CC4CDD-C1B0-43EC-96C0-A7DC19ED519C}"
 	ProjectSection(SolutionItems) = preProject
+		SQL Snippets\northwind_install.sql = SQL Snippets\northwind_install.sql
 		SQL Snippets\northwind_snippets.sql = SQL Snippets\northwind_snippets.sql
 	EndProjectSection
 EndProject
