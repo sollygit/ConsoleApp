@@ -49,7 +49,6 @@ namespace ConsoleApp
                 .Add("Exit", () => { exit = true; })
                 .Add("Encoding", new Action(Functions.Encoding))
                 .Add("Linked List", new Action(Functions.Linked_List))
-                .Add("Is Palindrome", new Action(Functions.IsPalindromeTest))
                 .Add("On Property Change", new Action(Functions.WeatherForecastPropertyChanged))
                 .Add("Fibonatchi", new Action(Functions.Fibonacci))
                 .Add("Integer to Roman", new Action(Functions.IntegerToRoman))

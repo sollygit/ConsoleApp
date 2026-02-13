@@ -29,19 +29,6 @@ namespace ConsoleApp.Common
             return word.Replace(" ", string.Empty);
         }
 
-        public static bool IsPalindrome(string word)
-        {
-            var spaceless = Spaceless(word);
-            var palindrom = String.Join(string.Empty, spaceless.Reverse());
-            bool isPali = palindrom.Equals(spaceless, StringComparison.OrdinalIgnoreCase);
-
-            Console.WriteLine(isPali ?
-                $"The word '{word}' is a Palindrome: {palindrom}" :
-                $"The word '{word}' is not a Palindrome: {palindrom}");
-
-            return isPali;
-        }
-
         public static void CustomSort(int[] arr)
         {
             var numbers = arr

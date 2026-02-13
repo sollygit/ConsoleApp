@@ -29,12 +29,6 @@ namespace ConsoleApp
             LinkedList.Test();
         }
 
-        public static void IsPalindromeTest()
-        {
-            Console.Write("Please enter your word:");
-            Utility.IsPalindrome(Console.ReadLine()!);
-        }
-
         public static void WeatherForecastPropertyChanged()
         {
             var weatherForecast = new WeatherForecast();
