@@ -1,3 +1,22 @@
+-- Write a query to find the second highest freight from an Orders table.
+SELECT MAX(Freight) AS SecondHighestFreight
+FROM Orders
+WHERE Freight < (SELECT MAX(Freight) FROM Orders);
+GO
+
+-- Write a query to find duplicate records in a table.
+SELECT FirstName, COUNT(*) as DuplicateCount
+FROM Employees
+GROUP BY FirstName
+HAVING COUNT(*) > 1;
+GO
+
+-- Write a query to count the number of products category-wise using GROUP BY.
+SELECT CategoryID, COUNT(*) AS ProductCount
+FROM Products
+GROUP BY CategoryID;
+GO
+
 SELECT COUNT(*) AS [Number of Employees] FROM Employees;
 SELECT TOP (10) ProductName FROM Products WHERE ProductName LIKE 'A%';
 SELECT TOP (10) ProductName FROM Products WHERE ProductName > 'A' and ProductName < 'C';
@@ -49,16 +68,16 @@ ORDER BY
 GO
 
 /* Write a query that selects average, highest and lowest sale order for all customer. */
-WITH Sales_CTE (SalesPersonID, NumberOfOrders)  
+WITH Sales_CTE (CustomerID, OrderCount)  
 AS (  
     SELECT CustomerID, COUNT(*)  
     FROM Orders
     WHERE CustomerID IS NOT NULL  
     GROUP BY CustomerID)  
 SELECT 
-	AVG(NumberOfOrders) AS "Average sales per customer",
-	MAX(NumberOfOrders) AS "Highest sale of customer",
-	MIN(NumberOfOrders) AS "Lowest sale of customer"  
+	AVG(OrderCount) AS "Avg sale per customer",
+	MAX(OrderCount) AS "Highest sale of customer",
+	MIN(OrderCount) AS "Lowest sale of customer"  
 FROM 
 	Sales_CTE;
 GO
@@ -164,24 +183,12 @@ BEGIN
 	END CATCH
 	SELECT @Result AS Result
 END
+GO
 
--- Some useful commands to remember:
-DBCC CHECKIDENT ('[TABLE_NAME]', RESEED, 0); -- Reseed on table
-SELECT @@SPID    -- Session number
-EXEC sp_lock     -- Find out about the locks
-dbcc useroptions -- Option settings
+-- DBCC CHECKIDENT ('[TABLE_NAME]', RESEED, 0); -- Reseed on table
 EXEC sp_who2 52  -- User's session state - more info
 EXEC sp_who 52   -- User's session state - general
-
-/*
-Note: This NOLOCK is not good to use with Update statements because it may not be dependable or good data.
-Select statements are OK to use when it is needed.
-*/
--- SELECT TOP (10) * FROM Customers
-SELECT Country, COUNT(CustomerID) as [CustomerCount]
-FROM Customers WITH(NOLOCK)
-GROUP BY Country
-ORDER BY CustomerCount DESC;
+GO
 
 /*
 	The following two tables are used to define users and their respective roles:
@@ -196,11 +203,10 @@ ORDER BY CustomerCount DESC;
 	The users_roles table should contain the mapping between each user and their roles. 
 	Each user can have many roles, and each role can have many users.
 
-	Modify the provided SQLite create table statement so that:
-
+	Modify the provided CREATE TABLE statement so that:
 	1. Only users from the users table can exist within users_roles.
 	2. Only roles from the roles table can exist within users_roles.
-	3. A user can only have a specific role once.
+3. A user can only have a specific role once.
 
 	CREATE TABLE users_roles (
 	  userId INTEGER NOT NULL,
