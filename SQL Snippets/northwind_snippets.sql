@@ -68,12 +68,12 @@ ORDER BY
 GO
 
 /* Write a query that selects average, highest and lowest sale order for all customer. */
-WITH Sales_CTE (CustomerID, OrderCount)  
-AS (  
+WITH Sales_CTE (CustomerID, OrderCount) AS (  
     SELECT CustomerID, COUNT(*)  
     FROM Orders
     WHERE CustomerID IS NOT NULL  
-    GROUP BY CustomerID)  
+    GROUP BY CustomerID
+)  
 SELECT 
 	AVG(OrderCount) AS "Avg sale per customer",
 	MAX(OrderCount) AS "Highest sale of customer",
@@ -114,11 +114,6 @@ BEGIN TRANSACTION
 	WHERE OrderID = 10248
 SAVE TRANSACTION Upd_UnitPrice10Perc;
 ROLLBACK TRANSACTION;
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER FUNCTION [Ints_Split] (
@@ -188,32 +183,4 @@ GO
 -- DBCC CHECKIDENT ('[TABLE_NAME]', RESEED, 0); -- Reseed on table
 EXEC sp_who2 52  -- User's session state - more info
 EXEC sp_who 52   -- User's session state - general
-GO
-
-/*
-	The following two tables are used to define users and their respective roles:
-	CREATE TABLE users (
-	  id INTEGER NOT NULL PRIMARY KEY,
-	  userName VARCHAR(50) NOT NULL)
-
-	CREATE TABLE roles(
-	  id INTEGER NOT NULL PRIMARY KEY,
-	  role VARCHAR(20) NOT NULL)
-	  
-	The users_roles table should contain the mapping between each user and their roles. 
-	Each user can have many roles, and each role can have many users.
-
-	Modify the provided CREATE TABLE statement so that:
-	1. Only users from the users table can exist within users_roles.
-	2. Only roles from the roles table can exist within users_roles.
-3. A user can only have a specific role once.
-
-	CREATE TABLE users_roles (
-	  userId INTEGER NOT NULL,
-	  roleId INTEGER NOT NULL,
-	  FOREIGN KEY(userId) REFERENCES users(id),
-	  FOREIGN KEY(roleId) REFERENCES roles(id),
-	  PRIMARY KEY (userId, roleId)
-	)
-*/
 GO
